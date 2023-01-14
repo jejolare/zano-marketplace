@@ -1,0 +1,27 @@
+.ui__logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .ui__logo__img {
+        margin-right: 20px;
+        > img {
+            width: 65px;
+            height: 65px;
+        }
+    }
+    .ui__logo__title {
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        > * {
+            line-height: 90%;
+        }
+        > h4 {
+            font-size: 32px;
+        }
+        > p {
+            font-size: 20px;
+        }
+    }
+}

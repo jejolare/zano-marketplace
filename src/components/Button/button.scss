@@ -1,0 +1,9 @@
+@import "../../assets/scss/variables.scss";
+
+.ui__button {
+    background-color: $button-background;
+    border: 1px solid $button-border;
+    border-radius: 4px;
+    width: 200px;
+    height: 50px;
+}

@@ -1,11 +1,10 @@
 import './main.scss';
-import Input from "../../components/Input/Input";
+import Header from '../../components/Header/Header';
 
 function Main() {
     return (
         <div className="main-page">
-            <h1>test</h1>
-            <Input placeholder={'test'}/>
+            <Header />
         </div>
     );
 }

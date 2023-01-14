@@ -1,0 +1,20 @@
+@import "../../assets/scss/variables.scss";
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: $wrapper-background;
+    > .header__search {
+        padding-left: 53px;
+        background-color: $input-background;
+        background-image: url(../../assets/images/UI/search_1.svg);
+        background-repeat: no-repeat;
+        background-position: 15px 50%;
+        border: 1px solid $input-border;
+        border-radius: 6px;
+        width: 1300px;
+        height: 50px;
+    }
+}
