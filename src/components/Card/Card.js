@@ -11,32 +11,31 @@ function Card() {
                 </div>
             </div>
             <div className="ui__card__info">
+
                 <div className="ui__card__main-info">
-                    <div className="ui__card__title">
+                    <div>
                         <h5>Test</h5>
                         <p>test cat</p>
                     </div>
-                    <div className="ui__card__exp-info">
-                        <h6 className="ui__card__exp-title">Expires in</h6>
-                        <p className="ui__card__exp-value">28 days</p>
+                    <div className="ui__card__exp-data">
+                        <h6>Expires in</h6>
+                        <p>28 days</p>
                     </div>
                 </div>
 
-                <div className="ui__card__secondary-info">
-                    <div className="ui__card__price-params">
+                <div className="ui__card__main-info">
+                    <div>
                         <p>test</p>
                         <div className="ui__card__price">
                             <img src={currencyImg} alt="Zano" />
-                            <p className="ui__card__price-value">1000</p>
+                            <p>1000</p>
                             <p className="ui__card__currency">ZANO</p>
                         </div>
                     </div>
                     <div className="ui__card__author">
-                        <p>@jejolare</p>
+                        <a href="/">@jejolare</a>
                     </div>
                 </div>
-                
-                
                 
             </div>
         </div>

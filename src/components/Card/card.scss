@@ -6,7 +6,19 @@
     width: 100%;
     height: 420px;
     margin: auto;
-    > .ui__card__background {
+    h6 {
+        font-size: 16px;
+    }
+    h5 {
+        font-size: 24px;
+    }
+    .ui__card__exp-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+    }
+    .ui__card__background {
         background-color: #181818;
         border-top-right-radius: 7px;
         border-top-left-radius: 7px;
@@ -23,30 +35,39 @@
             max-width: 100%; 
         }
     }
-    > .ui__card__info { 
+    .ui__card__info { 
         display: flex;
         flex-direction: column;
         padding: 25px;
         .ui__card__main-info {
             display: flex;
             justify-content: space-between;
-        }
-        .ui__card__secondary-info {
-            margin-top: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            .ui__card__price {
+            > div {
                 display: flex;
-            } 
-            .ui__card__price-value {
+                flex-direction: column;
+            }
+            &:not(:first-child) {
+                margin-top: 25px;
+            }
+            &:last-child {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+            }
+            .ui__card__exp-data {
+                align-items: flex-end;
+            }
+        }
+        .ui__card__price {
+            display: flex;
+            margin-top: 4px;
+            & p:nth-child(2) {
                 margin: 0 5px;
             }
-            .ui__card__currency {
-                color: $ui-color;
-                font-weight: 700;
-            }
+        } 
+        .ui__card__currency, .ui__card__author a {
+            color: $ui-color;
+            font-weight: 700;
         }
-
     }
 }
