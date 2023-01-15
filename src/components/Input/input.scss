@@ -1,0 +1,7 @@
+@import "../../assets/scss/variables.scss";
+
+.ui__input {
+    background-color: $input-background;
+    border: 1px solid $input-border;
+    border-radius: 6px;
+}

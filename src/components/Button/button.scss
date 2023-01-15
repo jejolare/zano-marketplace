@@ -1,7 +1,8 @@
 @import "../../assets/scss/variables.scss";
 
 .ui__button {
-    background-color: $button-background;
+    
+    background-color: $ui-color;
     border: 1px solid $button-border;
     border-radius: 4px;
     // width: 200px;
@@ -20,8 +21,8 @@
         padding: 10px 10px;
         font-size: 15px;
     }
-}
-
-.ui__button:hover {
-    background-color: $ui-color;
+    &:hover {
+        // background-color: $button-background;
+        background-color: $ui-hover-color;
+    }
 }

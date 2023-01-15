@@ -69,5 +69,8 @@
             color: $ui-color;
             font-weight: 700;
         }
+        .ui__card__author a:hover {
+            color: $ui-hover-color;
+        }
     }
 }

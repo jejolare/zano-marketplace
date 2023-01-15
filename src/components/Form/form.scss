@@ -1,0 +1,102 @@
+@import "../../assets/scss/variables.scss";
+
+.ui__form {
+    width: 670px;
+    padding: 60px;
+    background-color: $wrapper-background;
+    border: 1px solid $input-border;
+    border-radius: 7px;
+    p {
+        font-size: $default-font-size;
+        margin-bottom: 10px;    
+    }
+    h3 {
+        font-size: 43px;
+        margin-bottom: 50px;
+    }
+    span {
+        display: block;
+        font-size: 16px;
+        &.ui__warn {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        margin-bottom: 36px;
+    }
+    .ui__input {
+        &:first-of-type {
+            margin-bottom: 5px;
+        }
+        margin-bottom: 30px;
+        padding-left: 20px;
+        width: 480px;
+        height: 60px;
+    }
+    .ui__input__price {
+        width: 240px;
+        padding-left: 45px;
+        padding-right: 105px;
+        background-image: url(../../assets/images/UI/zano_1.svg);
+        background-repeat: no-repeat;
+        background-position: 15px 50%;
+        background-size: 18px 18px;
+    }
+    .ui__input__author {
+        width: 200px;
+        padding-left: 45px;
+        background-image: url(../../assets/images/UI/email_1.svg);
+        background-repeat: no-repeat;
+        background-position: 15px 50%;
+        background-size: 20px 20px;
+    }
+    .ui__input__image {
+        padding-left: 45px;
+        background-image: url(../../assets/images/UI/image_1.png);
+        background-repeat: no-repeat;
+        background-position: 15px 50%;
+        background-size: 18px 18px;
+    }
+    .ui__input__comments {
+        padding-left: 45px;
+        background-image: url(../../assets/images/UI/comments_1.svg);
+        background-repeat: no-repeat;
+        background-position: 15px 50%;
+        background-size: 18px 18px;
+    }
+    .ui__submit-btn {
+        width: 480px;
+        height: 60px;
+        background-color: $ui-color;
+        &:hover {
+            background-color: $ui-hover-color;
+        }
+        border: 1px solid $submit-btn-border;
+        border-radius: 7px;
+        font-weight: 700;
+        margin-top: 35px;
+        margin-bottom: 15px;
+    }
+    .ui__input__wrapper {
+        height: 60px;
+        > div {
+        position: relative;
+        top: -65px;
+        left: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+        width: 90px;
+        height: 60px;
+        background-color: $ui-color;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        }
+    } 
+    .ui__form__wrapper {
+        width: 480px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+}

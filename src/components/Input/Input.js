@@ -1,6 +1,8 @@
+import "./input.scss";
+
 function Input(props) {
     return (
-        <input type="text" placeholder={props.placeholder} />
+        <input className={props.className} type="text" placeholder={props.placeholder} />
     );
 }
 
