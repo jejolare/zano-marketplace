@@ -9,6 +9,7 @@
     font-family: "Montserrat";
     font-size: $default-font-size;
     color: $default-text;
+    transition: all 0.3s;
     ::placeholder { 
         color: $default-placeholder;
     }

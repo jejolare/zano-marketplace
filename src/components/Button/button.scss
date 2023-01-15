@@ -4,7 +4,24 @@
     background-color: $button-background;
     border: 1px solid $button-border;
     border-radius: 4px;
-    width: 200px;
-    height: 50px;
+    // width: 200px;
+    // height: 50px;
+    padding: 15px 40px;
+    cursor: pointer;
     font-weight: 700;
+    @media screen and (max-width : 1650px) {
+        padding: 11px 30px;
+    }
+    @media screen and (max-width : 500px) {
+        padding: 12px 20px;
+        font-size: 17px;
+    }
+    @media screen and (max-width : 400px) {
+        padding: 10px 10px;
+        font-size: 15px;
+    }
+}
+
+.ui__button:hover {
+    background-color: $ui-color;
 }

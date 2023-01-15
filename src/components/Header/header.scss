@@ -12,7 +12,27 @@ header {
     padding: 20px 50px;
     background-color: $wrapper-background;
     border-bottom: 1px solid $input-border;
-    > .header__search {
+    
+    @media screen and (max-width : 1650px) {
+        padding: 15px 35px;
+    }
+
+    @media screen and (max-width : 1100px) {
+        padding: 15px 20%;
+        padding-bottom: 85px;
+        justify-content: space-between;
+    }
+
+    @media screen and (max-width : 900px) {
+        padding: 15px 5%;
+        padding-bottom: 85px;
+    }
+    @media screen and (max-width : 400px) {
+        padding-bottom: 75px;
+    }
+    .header__search {
+        padding-top: 15px;
+        padding-bottom: 15px;
         padding-left: 53px;
         background-color: $input-background;
         background-image: url(../../assets/images/UI/search_1.svg);
@@ -21,6 +41,24 @@ header {
         border: 1px solid $input-border;
         border-radius: 6px;
         width: 1300px;
-        height: 50px;
+        
+        @media screen and (max-width : 1900px) {
+            width: 60%;
+        }
+        @media screen and (max-width : 1650px) {
+            padding-top: 11px;
+            padding-bottom: 11px;
+        }
+        @media screen and (max-width : 1100px) {
+            position: absolute;
+            top: 85px;
+        }
+        @media screen and (max-width : 900px) {
+            width: 90%;
+        }
+        @media screen and (max-width : 400px) {
+            font-size: 15px;
+            top: 75px;
+        }
     }
 }
