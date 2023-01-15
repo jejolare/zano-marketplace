@@ -1,11 +1,17 @@
 @import "../../assets/scss/variables.scss";
 
 header {
+    position: sticky;
+    z-index: 4;
+    width: 100%;
+    left: 0;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 50px;
     background-color: $wrapper-background;
+    border-bottom: 1px solid $input-border;
     > .header__search {
         padding-left: 53px;
         background-color: $input-background;

@@ -1,0 +1,52 @@
+@import "../../assets/scss/variables.scss";
+
+.ui__card {
+    background-color: $wrapper-background;
+    border-radius: 7px;
+    width: 100%;
+    height: 420px;
+    margin: auto;
+    > .ui__card__background {
+        background-color: #181818;
+        border-top-right-radius: 7px;
+        border-top-left-radius: 7px;
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+        position: relative;
+        img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            max-height: 88%;
+            max-width: 100%; 
+        }
+    }
+    > .ui__card__info { 
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+        .ui__card__main-info {
+            display: flex;
+            justify-content: space-between;
+        }
+        .ui__card__secondary-info {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            .ui__card__price {
+                display: flex;
+            } 
+            .ui__card__price-value {
+                margin: 0 5px;
+            }
+            .ui__card__currency {
+                color: $ui-color;
+                font-weight: 700;
+            }
+        }
+
+    }
+}
