@@ -1,0 +1,15 @@
+@import "../../assets/scss/variables.scss";
+
+.ui__main__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 100px 300px;
+    .ui__card {
+        position: sticky;
+        top: 200px;
+        margin: 0;
+        width: 480px;
+        height: 600px;
+    }
+}
