@@ -72,7 +72,13 @@ class AuthController {
         try {
             const user = await db.get("SELECT * FROM user WHERE token=?", [req.body.token]);
             const salt = generateString(12);
-            await db.run("UPDATE user SET password=?, salt=? WHERE token=?", [ sha256(req.body.password + salt), salt, user.token ]);
+            const token = generateString(24);
+            await db.run("UPDATE user SET password=?, salt=?, token=? WHERE token=?", [ 
+                sha256(req.body.password + salt), 
+                salt, 
+                token, 
+                user.token 
+            ]);
             res.send({ success: true });
         } catch(err) {
             try {
