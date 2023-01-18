@@ -7,7 +7,7 @@ function Card() {
         <div className="ui__card">
             <div className="ui__card__background">
                 <div className="ui__card__img">
-                    <img src={cardImg} alt="Card" />
+                    <img src={cardImg} alt="Card" draggable={false}/>
                 </div>
             </div>
             <div className="ui__card__info">

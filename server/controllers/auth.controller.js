@@ -40,11 +40,12 @@ class AuthController {
                 ]);
                 res.send({ success: true, data: token });
             }
+            await db.close();
         } catch(err) {
             try {
                 await db.close();
             } catch {}
-            res.send({ success: false, data: "Error while register" });
+            res.send({ success: false, data: "Registration error" });
             console.error(err);
         }
     }
@@ -53,6 +54,7 @@ class AuthController {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
             const user = await db.get("SELECT * FROM user WHERE nickname=?", [req.body.nickname]);
+            await db.close();
             if (user && sha256(req.body.password + user.salt) == user.password) {
                 res.send({ success: true, token: user.token });
             } else {
@@ -62,7 +64,7 @@ class AuthController {
             try {
                 await db.close();
             } catch {}
-            res.send({ success: false, data: "Error while login" });
+            res.send({ success: false, data: "Login error" });
             console.error(err);
         }
     }
@@ -79,12 +81,13 @@ class AuthController {
                 token, 
                 user.token 
             ]);
+            await db.close();
             res.send({ success: true });
         } catch(err) {
             try {
                 await db.close();
             } catch {}
-            res.send({ success: false, data: "Error while changing password" });
+            res.send({ success: false, data: "Password changing error" });
             console.error(err);
         }
     }
@@ -92,17 +95,26 @@ class AuthController {
     async checkToken(req, res, next) {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
-            const user = await db.get("SELECT * FROM user WHERE token=?", [req.body.token]);
-            if (user) {
-                next();
+            const user = await db.get("SELECT * FROM user WHERE token=?", [req.cookies.token]);
+            await db.close();
+            if (next) {
+                if (user) {
+                    return next();
+                }else {
+                    return res.send({ success: false, data: "Invalid token" });
+                }
             } else {
-                res.send({ success: false, data: "Invalid token" });
+                if (user) {
+                    res.send({ success: true, data: true });
+                } else {
+                    res.send({ success: true, data: false });
+                }
             }
         } catch(err) {
             try {
                 await db.close();
             } catch {}
-            res.send({ success: false, data: "Error while token check middleware" });
+            res.send({ success: false, data: "Token checking error" });
             console.error(err);
         }
     }

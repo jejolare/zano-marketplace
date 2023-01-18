@@ -7,41 +7,45 @@ import Card from "../../components/Card/Card"
 import { useNavigate } from "react-router-dom";
 
 function NewOffer() {
+
     const navigate = useNavigate();
+
     return (
         <div className="offer-page">
             <Header Button={<Button onMouseUp={() => navigate("/")}>Go Back</Button>}/>
-            <main>
-                <div className="ui__main__wrapper">
-                    <Form>
+            <main className="new-offer__wrapper">
+                <Form>
+                    <div>
                         <h3>Create New Offer</h3>
                         <p>Title</p>
-                        <Input className="ui__input"/>
+                        <Input className="new-offer__title"/>
                         <span>Maximum length is 30 characters</span>
                         <p>Category</p>
-                        <Input className="ui__input"/>
+                        <Input/>
                         <p>Description</p>
-                        <Input className="ui__input"/>
+                        <Input/>
                         <div className="ui__form__wrapper">
                             <div className="ui__input__wrapper">
                                 <p>Price</p>
-                                <Input className="ui__input ui__input__price"/>
-                                <div>ZANO</div>
+                                <div>
+                                    <Input className="ui__input__price"/>
+                                    <div>ZANO</div>
+                                </div>
                             </div>
                             <div>
                                 <p>Contact details</p>
-                                <Input className="ui__input ui__input__author"/>
+                                <Input className="ui__input__author"/>
                             </div>
                         </div>
                         <p>Image link</p>
-                        <Input className="ui__input ui__input__image"/>
+                        <Input className="ui__input__image"/>
                         <p>Comments</p>
-                        <Input className="ui__input ui__input__comments"/>
-                        <button className="ui__submit-btn">Submit</button>
+                        <Input className="ui__input__comments"/>
+                        <Button className="ui__submit-btn">Submit</Button>
                         <span className="ui__warn">You'll Be Prompted To Confirm Your Submission With Zano Wallet</span>
-                    </Form>
-                    <Card />
-                </div>
+                    </div>
+                </Form>
+                <Card />
             </main>
         </div>
     );

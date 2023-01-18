@@ -1,17 +1,58 @@
 @import "../../assets/scss/variables.scss";
 
+@mixin inputWithImage($defaultWidth: 100%) {
+
+    width: $defaultWidth;
+    background-repeat: no-repeat;
+    background-position: 15px 50%;
+    background-size: 18px 18px;
+    padding-left: 45px;
+
+    @media screen and (max-width: 1350px), (max-height: 800px) {
+        width: 100%;
+    }
+}
+
+@mixin formBlock() {
+    margin-bottom: 30px;
+    @media screen and (max-height: 900px) {
+        margin-bottom: 15px;
+    }
+}
+
 .ui__form {
     width: 670px;
     padding: 60px;
     background-color: $wrapper-background;
     border: 1px solid $input-border;
     border-radius: 7px;
+
+    @media screen and (max-width: 1350px), (max-height: 800px) {
+        width: 500px;
+        padding: 40px;
+    }
+    @media screen and (max-width: 550px) {
+        width: 95%;
+        padding: 20px;
+    }
+
     p {
         font-size: $default-font-size;
         margin-bottom: 10px;    
+        @media screen and (max-height: 900px) {
+            font-size: calc($default-font-size / 1.2)
+        }
     }
     h3 {
         font-size: 43px;
+        @media screen and (max-width: 1350px), (max-height: 800px) {
+            font-size: 36px;
+        }
+        @media screen and (max-width: 550px) {
+            margin-bottom: 30px;
+            font-size: 24px;
+            text-align: center;
+        }
         margin-bottom: 50px;
     }
     span {
@@ -20,83 +61,79 @@
         &.ui__warn {
             font-size: 14px;
             margin-bottom: 0;
+            @media screen and (max-width: 550px) {
+                text-align: center;
+            }
         }
         margin-bottom: 36px;
     }
     .ui__input {
-        &:first-of-type {
-            margin-bottom: 5px;
-        }
-        margin-bottom: 30px;
+        @include formBlock;
         padding-left: 20px;
-        width: 480px;
-        height: 60px;
+        width: 100%;
+        height: 60px; 
+        @media screen and (max-height: 900px) {
+            height: 45px; 
+        }
+        @media screen and (max-width: 550px) {
+            height: 50px;
+        }
     }
     .ui__input__price {
-        width: 240px;
-        padding-left: 45px;
+        @include inputWithImage(240px);
         padding-right: 105px;
         background-image: url(../../assets/images/UI/zano_1.svg);
-        background-repeat: no-repeat;
-        background-position: 15px 50%;
-        background-size: 18px 18px;
+        margin-bottom: 0;
     }
     .ui__input__author {
-        width: 200px;
-        padding-left: 45px;
+        @include inputWithImage(240px);
         background-image: url(../../assets/images/UI/email_1.svg);
-        background-repeat: no-repeat;
-        background-position: 15px 50%;
         background-size: 20px 20px;
     }
     .ui__input__image {
-        padding-left: 45px;
+        @include inputWithImage;
         background-image: url(../../assets/images/UI/image_1.png);
-        background-repeat: no-repeat;
-        background-position: 15px 50%;
-        background-size: 18px 18px;
     }
     .ui__input__comments {
-        padding-left: 45px;
+        @include inputWithImage;
         background-image: url(../../assets/images/UI/comments_1.svg);
-        background-repeat: no-repeat;
-        background-position: 15px 50%;
-        background-size: 18px 18px;
     }
     .ui__submit-btn {
-        width: 480px;
+        width: 100%;
         height: 60px;
         background-color: $ui-color;
         &:hover {
             background-color: $ui-hover-color;
         }
-        border: 1px solid $submit-btn-border;
         border-radius: 7px;
         font-weight: 700;
-        margin-top: 35px;
+        margin-top: 20px;
         margin-bottom: 15px;
+        @media screen and (max-width: 550px) {
+            margin-top: 0;
+        }
     }
     .ui__input__wrapper {
-        height: 60px;
-        > div {
-        position: relative;
-        top: -65px;
-        left: 150px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: 700;
-        width: 90px;
-        height: 60px;
-        background-color: $ui-color;
-        border-top-right-radius: 6px;
-        border-bottom-right-radius: 6px;
+        div {   
+            position: relative;
         }
     } 
     .ui__form__wrapper {
-        width: 480px;
-        margin-bottom: 30px;
+        @include formBlock;
+        width: 100%;
         display: flex;
         justify-content: space-between;
+        @media screen and (max-width: 1350px), (max-height: 800px) {
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+        input {
+            margin-bottom: 0;
+        }
+        > * {
+            @media screen and (max-width: 1350px), (max-height: 800px) {
+                margin-bottom: 30px;
+            }
+        }
     }
 }

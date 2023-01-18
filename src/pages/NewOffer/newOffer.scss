@@ -1,15 +1,105 @@
 @import "../../assets/scss/variables.scss";
 
-.ui__main__wrapper {
+.new-offer__wrapper {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin: 100px 300px;
+
+    @media screen and (max-width: 1820px) {
+        margin: 100px 200px;
+    }
+    @media screen and (max-width: 1650px) {
+        margin: 100px 100px;
+    }
+    @media screen and (max-width: 1450px) {
+        margin: 50px 70px;
+    }
+
+    @media screen and (max-width: 1150px) {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+    }
+    @media screen and (max-width: 550px) {
+        margin: 50px 10px;
+    }
+
+    .new-offer__title {
+        margin-bottom: 5px !important;
+    }
+
+    .ui__input__wrapper {
+        div {
+            > div {
+                right: 0;
+                top: 0;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 700;
+                width: 90px;
+                height: 100%;
+                background-color: $ui-color;
+                border-top-right-radius: 6px;
+                border-bottom-right-radius: 6px;
+            }
+        }
+    }
     .ui__card {
         position: sticky;
         top: 200px;
         margin: 0;
-        width: 480px;
-        height: 600px;
+        height: 575px;
+        width: 500px;
+
+        .ui__card__background {
+            height: 350px;
+            @media screen and (max-width: 1350px) and (min-width: 1150px) {
+                height: 250px;
+            }
+            @media screen and (max-width: 550px) {
+                height: 250px;
+            }
+        }
+        h5 {
+            font-size: 36px;
+            @media screen and (max-width: 1350px) and (min-width: 1150px) {
+                font-size: 24px;
+            }
+            @media screen and (max-width: 550px) {
+                font-size: 24px;
+            }
+        }
+        h6, p, a {
+            font-size: 24px;
+            @media screen and (max-width: 1350px) and (min-width: 1150px) {
+                font-size: 16px;
+            }
+            @media screen and (max-width: 550px) {
+                font-size: 16px;
+            }
+        }
+
+        @media screen and (max-width: 1650px) {
+            top: 113px;
+        }
+        @media screen and (max-width: 1450px) {
+            top: 130px;
+        }
+        @media screen and (max-width: 1350px) and (min-width: 1150px) {
+            height: 430px;
+            width: 400px;
+        }
+        @media screen and (max-width: 1150px) {
+            position: relative;
+            top: 0;
+            margin-bottom: 30px;
+        }
+        @media screen and (max-width: 550px) {
+            height: 430px;
+            width: 95%;
+        }
     }
 }

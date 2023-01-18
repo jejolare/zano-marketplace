@@ -1,0 +1,15 @@
+.ui__alert {
+    position: fixed;
+    top: 2%;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: rgb(255, 55, 55);
+    border-radius: 20px;
+    width: 300px;
+    height: 100px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
