@@ -1,5 +1,5 @@
 import cardImg from "../../assets/images/temp/Bitcoin.svg.png";
-import currencyImg from "../../assets/images/UI/zano_1.svg";
+import currencyImg from "../../assets/images/UI/zano.svg";
 import "./card.scss";
 
 function Card() {
