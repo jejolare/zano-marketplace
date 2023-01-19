@@ -55,7 +55,7 @@
         }
         margin-bottom: 50px;
     }
-    span {
+    > span {
         display: block;
         font-size: 16px;
         &.ui__warn {
@@ -69,7 +69,6 @@
     }
     .ui__input {
         @include formBlock;
-        padding-left: 20px;
         width: 100%;
         height: 60px; 
         @media screen and (max-height: 900px) {
@@ -118,6 +117,9 @@
             position: relative;
         }
     } 
+    .ui__image-loader {
+        @include formBlock;
+    }
     .ui__form__wrapper {
         @include formBlock;
         width: 100%;
@@ -136,4 +138,17 @@
             }
         }
     }
+
+    .ui__form__header {
+        margin-bottom: 45px;
+        text-align: left;
+        h3 {
+            margin-bottom: 7px;
+        }
+        p {
+            font-size: 15px;
+            opacity: 0.8;
+        }
+    }
+
 }

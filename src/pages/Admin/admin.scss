@@ -1,0 +1,56 @@
+.admin-page__handler {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    opacity: 0.5;
+    font-size: 14px;
+    padding: 10px;
+    pointer-events: all;
+}
+
+@mixin activeRoute {
+    color: #226DF4;
+}
+
+.admin-page {
+    header {
+        ul {
+            width: 50%;
+            list-style-type: none;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            li {
+                font-weight: 600;
+                a, div {
+                    font-size: 28px;
+                    line-height: 100%;
+                }
+                div {
+                    height: 44px;
+                    width: 1px;
+                    background-color: white;
+                }
+                &:hover {
+                    a {
+                        @include activeRoute;
+                    }
+                }
+            }
+            .admin-page__active {
+                @include activeRoute;
+            }
+        }
+    }
+    form {
+        margin-bottom: 30px;
+    }
+}
+.admin-page__settings {
+    form {
+        position: relative;
+        left: 50%;
+        margin-top: 100px;
+        transform: translate(-50%);
+    }
+}

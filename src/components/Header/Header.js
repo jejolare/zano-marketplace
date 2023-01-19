@@ -6,7 +6,7 @@ function Header(props) {
     return (
         <header>
             <Logo />
-            <SearchInput />
+            {props.children || <SearchInput />}
             {props.Button}
         </header>
     );

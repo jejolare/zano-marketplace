@@ -1,7 +1,49 @@
 @import "../../assets/scss/variables.scss";
 
 .ui__input {
-    background-color: $input-background;
-    border: 1px solid $input-border;
+    input {
+        width: 100%;
+        padding-left: 20px; 
+        height: 100%;
+        background-color: $input-background;
+        border: 1px solid $input-border;
+        border-radius: 6px;
+    }
+    .ui__input__arrow {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -25%);
+        right: 20px;
+        cursor: pointer;
+    }
+    .ui__input__select {
+        padding-right: 55px;
+    }
+}
+
+.ui__input__select:before {
+    background-image: url(../../assets/images/UI/arrow.svg);
+    background-repeat: no-repeat;
+    background-position: 95% 62%;
+}
+.ui__input__options {
+    position: absolute;
+    width: 100%;
+    bottom: -15px;
+    transform: translate(0, 100%);
+    left: 0;
+    background-color: #444444;
+    border: 1px solid #999999;
     border-radius: 6px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    > *{
+        padding: 10px 0;
+        cursor: pointer;
+    }
+    > * {
+        border-bottom: 1px solid #999999;
+    }
 }

@@ -3,17 +3,16 @@ import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import Alert from "../../components/Alert/Alert";
 import { useState, useContext } from "react";
-import { useCookies } from 'react-cookie';
+import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 import { Store } from "../../store/store-reducer";
-import { updateMarketState } from "../../store/actions";
+import { updateMarketState, updateAdminState } from "../../store/actions";
 
 function Registration() {
 
     const { dispatch } = useContext(Store);
 
     const navigate = useNavigate();
-    const [_, setCookie] = useCookies(['token']);
 
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -45,15 +44,16 @@ function Registration() {
         })
         .then(res => res.json())
         .then(json => json.data);
-        setCookie('token', token);
+        Cookies.set('token', token, { expires: 7000 });
         updateMarketState(dispatch, true);
+        updateAdminState(dispatch, true);
         navigate('/admin');
     }
 
     return (
         <>
             <Form>
-                <div className="setup-page__header">
+                <div className="ui__form__header">
                     <h3>Create your account</h3>
                     <p>As it’s your first time here, you need to create account</p>
                 </div>

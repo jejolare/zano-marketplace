@@ -1,9 +1,10 @@
 import React, { Suspense, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.scss';
-import { isTemplatePrepared } from "./utils/utils";
+import { isTemplatePrepared, checkAuth } from "./utils/utils";
 import { Store } from "./store/store-reducer";
-import { updateMarketState } from "./store/actions";
+import { updateMarketState, updateAdminState } from "./store/actions";
+import AdminHandler from "./pages/Admin/AdminHandler";
 
 const MainPage = React.lazy(() => import('./pages/Main/Main'));
 const AdminPage = React.lazy(() => import('./pages/Admin/Admin'));
@@ -18,9 +19,18 @@ function App() {
   useEffect(() => {
     async function checkAppStatus() {
       const isPrepared = await isTemplatePrepared();
+
       if (!isPrepared) {
         updateMarketState(dispatch, false);
+      } else {
+
+        checkAuth()
+        .then((res) => {
+            if (res) updateAdminState(dispatch, true);
+        });
+        
       }
+
     }
     checkAppStatus();
   }, []);
@@ -35,6 +45,7 @@ function App() {
                 <Route exact path="/" element={<MainPage/>}/>
                 <Route exact path="/offer/add" element={<NewOfferPage/>}/>
                 <Route exact path="/admin" element={<AdminPage/>}/>
+                <Route exact path="/admin/:type" element={<AdminPage/>}/>
                 <Route exact path="/auth" element={<SetupPage/>}/>
               </>
             }
@@ -42,6 +53,7 @@ function App() {
               <Route exact path="/" element={<SetupPage/>}/>
             }
           </Routes>
+          <AdminHandler/>
          </Suspense> 
       </Router>
     </div>
