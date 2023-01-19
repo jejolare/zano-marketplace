@@ -30,11 +30,11 @@ class AuthController {
                 res.send({ success: false, data: "User already exists" });
             } else {
                 const salt = generateString(12);
-                const password = sha256(req.body.password + salt);
+                const hash = sha256(req.body.password + salt);
                 const token = generateString(24);
-                await db.run("INSERT INTO user (nickname, password, salt, token) VALUES (?, ?, ?, ?)", [
+                await db.run("INSERT INTO user (nickname, hash, salt, token) VALUES (?, ?, ?, ?)", [
                     req.body.nickname, 
-                    password, 
+                    hash, 
                     salt, 
                     token 
                 ]);
@@ -55,7 +55,7 @@ class AuthController {
         try {
             const user = await db.get("SELECT * FROM user WHERE nickname=?", [req.body.nickname]);
             await db.close();
-            if (user && sha256(req.body.password + user.salt) == user.password) {
+            if (user && sha256(req.body.password + user.salt) == user.hash) {
                 res.send({ success: true, token: user.token });
             } else {
                 res.send({ success: false, data: "Wrong nickname or password" });
@@ -75,7 +75,7 @@ class AuthController {
             const user = await db.get("SELECT * FROM user WHERE token=?", [req.body.token]);
             const salt = generateString(12);
             const token = generateString(24);
-            await db.run("UPDATE user SET password=?, salt=?, token=? WHERE token=?", [ 
+            await db.run("UPDATE user SET hash=?, salt=?, token=? WHERE token=?", [ 
                 sha256(req.body.password + salt), 
                 salt, 
                 token, 
@@ -100,7 +100,7 @@ class AuthController {
             if (next) {
                 if (user) {
                     return next();
-                }else {
+                } else {
                     return res.send({ success: false, data: "Invalid token" });
                 }
             } else {
