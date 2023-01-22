@@ -72,14 +72,12 @@ class AuthController {
     async changePassword(req, res) {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
-            const user = await db.get("SELECT * FROM user WHERE token=?", [req.body.token]);
             const salt = generateString(12);
             const token = generateString(24);
-            await db.run("UPDATE user SET hash=?, salt=?, token=? WHERE token=?", [ 
+            await db.run("UPDATE user SET hash=?, salt=?, token=?", [ 
                 sha256(req.body.password + salt), 
                 salt, 
-                token, 
-                user.token 
+                token
             ]);
             await db.close();
             res.send({ success: true });
@@ -88,33 +86,6 @@ class AuthController {
                 await db.close();
             } catch {}
             res.send({ success: false, data: "Password changing error" });
-            console.error(err);
-        }
-    }
-
-    async checkToken(req, res, next) {
-        const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
-        try {
-            const user = await db.get("SELECT * FROM user WHERE token=?", [req.cookies.token]);
-            await db.close();
-            if (next) {
-                if (user) {
-                    return next();
-                } else {
-                    return res.send({ success: false, data: "Invalid token" });
-                }
-            } else {
-                if (user) {
-                    res.send({ success: true, data: true });
-                } else {
-                    res.send({ success: true, data: false });
-                }
-            }
-        } catch(err) {
-            try {
-                await db.close();
-            } catch {}
-            res.send({ success: false, data: "Token checking error" });
             console.error(err);
         }
     }
