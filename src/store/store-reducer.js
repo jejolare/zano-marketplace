@@ -2,7 +2,8 @@ import { createContext, useReducer } from "react";
 
 const initialState = {
   isPrepared: true,
-  isAdmin: false
+  isAdmin: false,
+  config: {}
 }
 
 
@@ -12,6 +13,8 @@ const reducer = (state, action) => {
           return { ...state, isPrepared: action.payload };
         case "ADMIN__STATE_UPDATED":
           return { ...state, isAdmin: action.payload };
+        case "CONFIG_UPDATED":
+          return { ...state, config: action.payload };
         default:
           return { ...state };
     }

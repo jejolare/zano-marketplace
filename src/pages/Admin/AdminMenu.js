@@ -7,7 +7,7 @@ function AdminMenu() {
     }
 
     return (
-        <ul>
+        <ul className="header__mobile">
             <li><NavLink to={'/admin/general'} className={getClasses}>GENERAL</NavLink></li>
             <li><div></div></li>
             <li><NavLink to={'/admin/filters'} className={getClasses}>FILTERS</NavLink></li>

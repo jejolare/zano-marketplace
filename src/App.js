@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.scss';
 import { isTemplatePrepared, checkAuth } from "./utils/utils";
 import { Store } from "./store/store-reducer";
-import { updateMarketState, updateAdminState } from "./store/actions";
+import { updateMarketState, updateAdminState, updateConfigState } from "./store/actions";
 import AdminHandler from "./pages/Admin/AdminHandler";
 
 const MainPage = React.lazy(() => import('./pages/Main/Main'));
@@ -35,6 +35,19 @@ function App() {
     checkAppStatus();
   }, []);
 
+  useEffect(() => {
+    async function getConfig() {
+        const configJson = await fetch('/api/data/get-config')
+        .then(res => res.json())
+        .then(json => JSON.parse(json.data || '{}'));
+        updateConfigState(dispatch, configJson);
+    }
+
+    getConfig();
+  }, [state.isPrepared]);
+
+
+
   return (
     <div className="App">
       <Router>
@@ -50,7 +63,7 @@ function App() {
               </>
             }
             {!state.isPrepared && 
-              <Route exact path="/" element={<SetupPage/>}/>
+              <Route exact path="/*" element={<SetupPage/>}/>
             }
           </Routes>
           <AdminHandler/>

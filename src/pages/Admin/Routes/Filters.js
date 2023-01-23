@@ -15,11 +15,11 @@ function Filters() {
                     <p>Edit filters of your marketplace</p>
                 </div>
                 <p>Category</p>
-                <Input options={['cat', 'dog']} value={category} setValue={setCategory}/>
+                <Input options={['cat', 'dog']} value={category} setValue={setCategory} placeholder="Not selected"/>
                 <p>Location Country</p>
-                <Input options={['test 1', 'test 2']}/>
+                <Input options={['test 1', 'test 2']} placeholder="Not selected"/>
                 <p>Location City</p>
-                <Input options={['test 1', 'test 2']}/>
+                <Input options={['test 1', 'test 2']} placeholder="Not selected"/>
                 <Button className="ui__submit-btn" onMouseUp={() => {}}>Save</Button>
             </Form>
         </div>

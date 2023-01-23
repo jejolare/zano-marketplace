@@ -10,3 +10,10 @@ export const updateAdminState = (dispatch, state) => {
         payload: state,
     });
 }
+
+export const updateConfigState = (dispatch, state) => {
+    return dispatch({
+        type: "CONFIG_UPDATED",
+        payload: state,
+    });
+}

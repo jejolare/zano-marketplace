@@ -2,7 +2,7 @@
 
 .new-offer__wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     margin: 100px 300px;
 
@@ -20,8 +20,9 @@
         flex-direction: column-reverse;
         align-items: center;
         justify-content: center;
+        margin: 0;
     }
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 600px) {
         margin: 50px 10px;
     }
 
@@ -30,76 +31,42 @@
     }
 
     .ui__input__wrapper {
-        div {
-            > div {
-                right: 0;
-                top: 0;
-                position: absolute;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-weight: 700;
-                width: 90px;
-                height: 100%;
-                background-color: $ui-color;
-                border-top-right-radius: 6px;
-                border-bottom-right-radius: 6px;
-            }
+        .ui__input__asset {
+            right: 0;
+            top: 0;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            width: 90px;
+            height: 100%;
+            background-color: $ui-color;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
         }
     }
+
+    .ui__form {
+        margin-right: 50px;
+        @media screen and (max-width: 1150px) {
+            margin: 0;
+        }
+    }
+    
     .ui__card {
         position: sticky;
-        top: 200px;
+        top: 100px;
+        height: 420px;
+        width: 340px;
         margin: 0;
-        height: 575px;
-        width: 500px;
-
-        .ui__card__background {
-            height: 350px;
-            @media screen and (max-width: 1350px) and (min-width: 1150px) {
-                height: 250px;
-            }
-            @media screen and (max-width: 550px) {
-                height: 250px;
-            }
-        }
-        h5 {
-            font-size: 36px;
-            @media screen and (max-width: 1350px) and (min-width: 1150px) {
-                font-size: 24px;
-            }
-            @media screen and (max-width: 550px) {
-                font-size: 24px;
-            }
-        }
-        h6, p, a {
-            font-size: 24px;
-            @media screen and (max-width: 1350px) and (min-width: 1150px) {
-                font-size: 16px;
-            }
-            @media screen and (max-width: 550px) {
-                font-size: 16px;
-            }
-        }
-
-        @media screen and (max-width: 1650px) {
-            top: 113px;
-        }
-        @media screen and (max-width: 1450px) {
-            top: 130px;
-        }
-        @media screen and (max-width: 1350px) and (min-width: 1150px) {
-            height: 430px;
-            width: 400px;
-        }
+        margin-left: 50px;
         @media screen and (max-width: 1150px) {
             position: relative;
             top: 0;
+            margin: 0;
             margin-bottom: 30px;
-        }
-        @media screen and (max-width: 550px) {
-            height: 430px;
-            width: 95%;
+            margin-top: 50px;
         }
     }
 }

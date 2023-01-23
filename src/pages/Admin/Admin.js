@@ -15,7 +15,7 @@ function Admin() {
 
     useEffect(() => {
         if (!state.isAdmin || !state.isPrepared) {
-            navigate('/auth');
+            return navigate('/auth');
         } else {
             navigate('/admin/general'); 
         }
@@ -28,7 +28,7 @@ function Admin() {
             > 
                 <Menu/>
             </Header>
-            {params.type === 'general' && <General/> }
+            {params.type === 'general' && <General config={state.config}/> }
             {params.type === 'filters' && <Filters/> }
             {/* {params.type === 'general' && <General/> } */}
         </div>

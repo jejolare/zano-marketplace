@@ -1,17 +1,21 @@
 import logoImg from "../../assets/images/UI/logo.png";
 import "./logo.scss"
 import { Link } from "react-router-dom";
+import { getLogo } from "../../utils/utils";
+import { useEffect } from "react";
 
-function Logo() {
+function Logo(props) {
+
+    const config = props.config;
     return (
         <Link to={'/'}>
             <div className="ui__logo">
                 <div className="ui__logo__img">
-                    <img src={logoImg} alt="Logo" />
+                    <img src={config.customLogo ? '/api/data/get-logo' : logoImg} alt="Logo" />
                 </div>
                 <div className="ui__logo__title">
-                    <h4>Zano</h4>
-                    <p>Marketplace</p>
+                    <h4>{config.title}</h4>
+                    <p>{config.subtitle}</p>
                 </div>
             </div>
         </Link>

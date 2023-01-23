@@ -28,10 +28,10 @@
     border-radius: 7px;
 
     @media screen and (max-width: 1350px), (max-height: 800px) {
-        width: 500px;
+        width: 550px;
         padding: 40px;
     }
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 600px) {
         width: 95%;
         padding: 20px;
     }
@@ -48,20 +48,20 @@
         @media screen and (max-width: 1350px), (max-height: 800px) {
             font-size: 36px;
         }
-        @media screen and (max-width: 550px) {
+        @media screen and (max-width: 600px) {
             margin-bottom: 30px;
             font-size: 24px;
-            text-align: center;
+            // text-align: center;
         }
         margin-bottom: 50px;
     }
-    > span {
+    > span, > .ui__form__content > span {
         display: block;
         font-size: 16px;
         &.ui__warn {
             font-size: 14px;
             margin-bottom: 0;
-            @media screen and (max-width: 550px) {
+            @media screen and (max-width: 600px) {
                 text-align: center;
             }
         }
@@ -74,43 +74,28 @@
         @media screen and (max-height: 900px) {
             height: 45px; 
         }
-        @media screen and (max-width: 550px) {
+        @media screen and (max-width: 600px) {
             height: 50px;
         }
     }
-    .ui__input__price {
+    .ui__input__price input {
         @include inputWithImage(240px);
         padding-right: 105px;
         background-image: url(../../assets/images/UI/zano.svg);
         margin-bottom: 0;
     }
-    .ui__input__author {
+    .ui__input__author input {
         @include inputWithImage(240px);
         background-image: url(../../assets/images/UI/email.svg);
         background-size: 20px 20px;
     }
-    .ui__input__image {
+    .ui__input__image input {
         @include inputWithImage;
         background-image: url(../../assets/images/UI/gallery.png);
     }
-    .ui__input__comments {
+    .ui__input__comments input {
         @include inputWithImage;
         background-image: url(../../assets/images/UI/comments.svg);
-    }
-    .ui__submit-btn {
-        width: 100%;
-        height: 60px;
-        background-color: $ui-color;
-        &:hover {
-            background-color: $ui-hover-color;
-        }
-        border-radius: 7px;
-        font-weight: 700;
-        margin-top: 20px;
-        margin-bottom: 15px;
-        @media screen and (max-width: 550px) {
-            margin-top: 0;
-        }
     }
     .ui__input__wrapper {
         div {   
@@ -121,7 +106,6 @@
         @include formBlock;
     }
     .ui__form__wrapper {
-        @include formBlock;
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -131,11 +115,6 @@
         }
         input {
             margin-bottom: 0;
-        }
-        > * {
-            @media screen and (max-width: 1350px), (max-height: 800px) {
-                margin-bottom: 30px;
-            }
         }
     }
 
@@ -149,6 +128,17 @@
             font-size: 15px;
             opacity: 0.8;
         }
+    }
+
+    .ui__form__switch > p {
+        margin: 0;
+        margin-left: 10px;
+    }
+
+    .ui__form__switch {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
     }
 
 }

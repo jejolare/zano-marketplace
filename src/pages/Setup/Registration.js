@@ -10,7 +10,7 @@ import { updateMarketState, updateAdminState } from "../../store/actions";
 
 function Registration() {
 
-    const { dispatch } = useContext(Store);
+    const { state, dispatch } = useContext(Store);
 
     const navigate = useNavigate();
 
@@ -47,9 +47,9 @@ function Registration() {
         Cookies.set('token', token, { expires: 7000 });
         updateMarketState(dispatch, true);
         updateAdminState(dispatch, true);
+        console.log('ok');
         navigate('/admin');
     }
-
     return (
         <>
             <Form>

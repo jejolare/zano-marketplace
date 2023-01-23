@@ -15,11 +15,11 @@ function NewOffer() {
             <Header Button={<Button onMouseUp={() => navigate("/")}>Go Back</Button>}/>
             <main className="new-offer__wrapper">
                 <Form>
-                    <div>
+                    <div className="ui__form__content">
                         <h3>Create New Offer</h3>
                         <p>Title</p>
                         <Input className="new-offer__title"/>
-                        <span>Maximum length is 30 characters</span>
+                        <span >Maximum length is 30 characters</span>
                         <p>Category</p>
                         <Input/>
                         <p>Description</p>
@@ -29,7 +29,7 @@ function NewOffer() {
                                 <p>Price</p>
                                 <div>
                                     <Input className="ui__input__price"/>
-                                    <div>ZANO</div>
+                                    <div className="ui__input__asset">ZANO</div>
                                 </div>
                             </div>
                             <div>

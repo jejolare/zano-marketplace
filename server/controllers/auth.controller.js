@@ -4,6 +4,7 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import generateString from "../generateString.js";
 import sha256 from "sha256";
+import defaultConfig from "../defaultConfig.json" assert { type: "json" };
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -32,11 +33,12 @@ class AuthController {
                 const salt = generateString(12);
                 const hash = sha256(req.body.password + salt);
                 const token = generateString(24);
-                await db.run("INSERT INTO user (nickname, hash, salt, token) VALUES (?, ?, ?, ?)", [
+                await db.run("INSERT INTO user (nickname, hash, salt, token, config) VALUES (?, ?, ?, ?, ?)", [
                     req.body.nickname, 
                     hash, 
                     salt, 
-                    token 
+                    token,
+                    JSON.stringify(defaultConfig) 
                 ]);
                 res.send({ success: true, data: token });
             }

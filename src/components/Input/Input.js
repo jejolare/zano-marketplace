@@ -20,15 +20,17 @@ function Input(props) {
             return () => document.removeEventListener('click', handleClick);
         });
 
-        const filteredData = props.options.filter(e => e.includes(props.value));
+        const options = props.options ? ['Not selected', ...(props.options || [])] : undefined;
+
+        const filteredData = options.filter(e => e.includes(props.value));
 
         return (
             <div className="ui__input__options" ref={popupRef}>
-                {(filteredData[0] ? filteredData : props.options).map(e => 
+                {(filteredData[0] ? filteredData : options).map(e => 
                     <p 
                         key={nanoid()} 
                         onClick={() => {
-                            props.setValue(e);
+                            props.setValue(e === 'Not selected' ? '' : e);
                             setSelectorState(false);
                         }}
                     >
@@ -40,9 +42,9 @@ function Input(props) {
     }
 
     return (
-        <div style={{ 'position': 'relative' }} className="ui__input">
+        <div style={{ 'position': 'relative' }} className={"ui__input " + (props.className || '')}>
             <input 
-                className={(props.className || '') + (props.options ? ' ui__input__select' : '')} 
+                className={(props.options ? ' ui__input__select' : '')} 
                 type={props.type || "text"}
                 placeholder={props.placeholder} 
                 onInput={e => props.setValue(e.target.value)}
@@ -60,7 +62,7 @@ function Input(props) {
                     alt="options" 
                     className="ui__input__arrow" 
                     style={{
-                        'transform': selectorOpen ? 'rotate(180deg) translate(0, 50%)' : undefined,
+                        'transform': selectorOpen ? 'rotateX(180deg) translate(0, 65%)' : undefined,
                     }}
                     onClick={e => {
                         e.stopPropagation();
