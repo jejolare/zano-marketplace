@@ -7,9 +7,9 @@ function Input(props) {
 
     const [selectorOpen, setSelectorState] = useState(false);
 
-    function Selector() {
+    const popupRef = useRef(null);
 
-        const popupRef = useRef(null);
+    function Selector() {
 
         useEffect(() => {
             function handleClick(e) {
@@ -25,7 +25,7 @@ function Input(props) {
         const filteredData = options.filter(e => props.noInput ? e : e.includes(props.value));
 
         return (
-            <div className="ui__input__options" ref={popupRef}>
+            <div className="ui__input__options">
                 {(filteredData[0] ? filteredData : options).map(e => 
                     <p 
                         key={nanoid()} 
@@ -41,20 +41,22 @@ function Input(props) {
         );
     }
 
+    function handlerInputClick(e) {
+        if (props.options) {
+            e.stopPropagation();
+            setSelectorState(!selectorOpen);
+        }
+    }
+
     return (
-        <div style={{ 'position': 'relative' }} className={"ui__input " + (props.className || '')}>
+        <div style={{ 'position': 'relative' }} className={"ui__input " + (props.className || '')} ref={popupRef}>
             <input 
                 className={(props.options ? ' ui__input__select' : '')} 
                 type={props.type || "text"}
                 placeholder={props.placeholder} 
                 onInput={e => props.noInput ? '' : props.setValue(e.target.value)}
                 value={props.value}
-                onClick={(e) => {
-                    if (props.options) {
-                        e.stopPropagation();
-                        setSelectorState(true);
-                    }
-                }}
+                onClick={handlerInputClick}
                 {...props.attributes}
             />
             {props.options &&
@@ -65,10 +67,7 @@ function Input(props) {
                     style={{
                         'transform': selectorOpen ? 'rotateX(180deg) translate(0, 65%)' : undefined,
                     }}
-                    onClick={e => {
-                        e.stopPropagation();
-                        setSelectorState(!selectorOpen)
-                    }}
+                    onClick={handlerInputClick}
                 />
             }
             {selectorOpen && <Selector/>}
