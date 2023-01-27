@@ -9,7 +9,7 @@
 }
 
 @mixin activeRoute {
-    color: #226DF4;
+    color: var(--ui-color);
 }
 
 .admin-page {

@@ -21,7 +21,7 @@
         }
     }
     .ui__logo__title {
-        color: #ffffff;
+        color: var(--default-text);
         display: flex;
         flex-direction: column;
         justify-content: flex-start;

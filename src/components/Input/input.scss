@@ -37,7 +37,7 @@
     bottom: -15px;
     transform: translate(0, 100%);
     left: 0;
-    background-color: #444444;
+    background-color: var(--input-background);
     border: 1px solid #999999;
     border-radius: 6px;
     z-index: 5;

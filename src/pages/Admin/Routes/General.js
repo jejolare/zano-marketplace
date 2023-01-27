@@ -57,13 +57,13 @@ function General(props) {
                     <p>Edit general view of your marketplace</p>
                 </div>
                 <p>Title</p>
-                <Input placeholder="type new title" value={title} setValue={setTitle} />
+                <Input placeholder="Type new title" value={title} setValue={setTitle} />
                 <p>Subtitle</p>
-                <Input placeholder="type new subtitle" value={subtitle} setValue={setSubtitle}/>
+                <Input placeholder="Type new subtitle" value={subtitle} setValue={setSubtitle}/>
                 <p>Logo</p>
                 <ImageUploader value={logo} setValue={setLogo}/>
                 <p>Change password</p>
-                <Input placeholder="type new password" value={password} setValue={setPassword} type="password"/>
+                <Input placeholder="Type new password" value={password} setValue={setPassword} type="password"/>
                 <div className="ui__form__switch">
                     <Switch value={allowPosts} setValue={setPostsState}/>
                     <p>Allow everyone to post new offers</p>
