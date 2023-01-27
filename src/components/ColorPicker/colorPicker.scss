@@ -1,0 +1,42 @@
+.ui__color-picker {
+    width: 100%;
+    padding-left: 20px;
+    height: 100%;
+    background-color: #444444;
+    border: 1px solid #555555;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    p {
+        margin: 0;
+        margin-left: 15px;
+    }
+    input, .ui__color-picker__preview {
+        appearance: none;
+        border: none;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+    .ui__color-picker__preview {
+        position: absolute;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .ui__color-picker__preview div {
+        height: 70%;
+        width: 70%;
+    }
+    input::-webkit-color-swatch-wrapper {
+        padding: 2px;
+    }
+    input::-webkit-color-swatch {
+        border: none;
+    }
+}

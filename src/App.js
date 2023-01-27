@@ -1,9 +1,9 @@
 import React, { Suspense, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.scss';
-import { isTemplatePrepared, checkAuth } from "./utils/utils";
+import { isTemplatePrepared, checkAuth, redefineStyle } from "./utils/utils";
 import { Store } from "./store/store-reducer";
-import { updateMarketState, updateAdminState, updateConfigState } from "./store/actions";
+import { updateMarketState, updateAdminState, updateConfigState, updateStylesState } from "./store/actions";
 import AdminHandler from "./pages/Admin/AdminHandler";
 
 const MainPage = React.lazy(() => import('./pages/Main/Main'));
@@ -40,13 +40,14 @@ function App() {
         const configJson = await fetch('/api/data/get-config')
         .then(res => res.json())
         .then(json => JSON.parse(json.data || '{}'));
+        
         updateConfigState(dispatch, configJson);
+        for (const iterator of configJson.styles) {
+          redefineStyle(iterator.property, iterator.value);
+        }
     }
-
     getConfig();
   }, [state.isPrepared]);
-
-
 
   return (
     <div className="App">

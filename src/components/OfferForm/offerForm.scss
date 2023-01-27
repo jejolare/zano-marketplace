@@ -1,0 +1,72 @@
+@import "../../assets/scss/variables.scss";
+
+.new-offer__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 100px 300px;
+
+    @media screen and (max-width: 1820px) {
+        margin: 100px 200px;
+    }
+    @media screen and (max-width: 1650px) {
+        margin: 100px 100px;
+    }
+    @media screen and (max-width: 1450px) {
+        margin: 50px 70px;
+    }
+
+    @media screen and (max-width: 1150px) {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+    @media screen and (max-width: 600px) {
+        margin: 50px 10px;
+    }
+
+    .new-offer__title {
+        margin-bottom: 5px !important;
+    }
+
+    .ui__input__wrapper {
+        .ui__input__asset {
+            right: 0;
+            top: 0;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            width: 90px;
+            height: 100%;
+            background-color: $ui-color;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+    }
+
+    .ui__form {
+        margin-right: 50px;
+        @media screen and (max-width: 1150px) {
+            margin: 0;
+        }
+    }
+    
+    .ui__card {
+        position: sticky;
+        top: 100px;
+        height: 420px;
+        width: 340px;
+        margin: 0;
+        margin-left: 50px;
+        @media screen and (max-width: 1150px) {
+            position: relative;
+            top: 0;
+            margin: 0;
+            margin-bottom: 30px;
+            margin-top: 50px;
+        }
+    }
+}

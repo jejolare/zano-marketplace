@@ -6,6 +6,7 @@ import { useEffect, useContext } from "react";
 import { Store } from "../../store/store-reducer";
 import General from "./Routes/General";
 import Filters from "./Routes/Filters";
+import Styles from "./Routes/Styles";
 import './admin.scss';
 
 function Admin() {
@@ -29,8 +30,8 @@ function Admin() {
                 <Menu/>
             </Header>
             {params.type === 'general' && <General config={state.config}/> }
-            {params.type === 'filters' && <Filters/> }
-            {/* {params.type === 'general' && <General/> } */}
+            {params.type === 'filters' && <Filters config={state.config}/> }
+            {params.type === 'styles' && <Styles/> }
         </div>
     );
 }

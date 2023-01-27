@@ -1,5 +1,91 @@
 {
     "title": "Zano",
     "subtitle": "Marketplace",
-    "allowPosts": true
+    "allowPosts": true,
+    "styles": [
+        {
+            "name": "Default Background",
+            "property": "default-background",
+            "value": "#222222",
+            "type": "color"
+        },
+        {
+            "name": "Wrapper Background",
+            "property": "wrapper-background",
+            "value": "#2c2c2c",
+            "type": "color"
+        },
+        {
+            "name": "Input Background",
+            "property": "input-background",
+            "value": "#444444",
+            "type": "color"
+        },
+        {
+            "name": "Input Border",
+            "property": "input-border",
+            "value": "#555555",
+            "type": "color"
+        },
+        {
+            "name": "Default Font Size (px)",
+            "property": "default-font-size",
+            "value": "20px",
+            "type": "font-size"
+        },
+        {
+            "name": "Default Text",
+            "property": "default-text",
+            "value": "#ffffff",
+            "type": "color"
+        },
+        {
+            "name": "Default Placeholder",
+            "property": "default-placeholder",
+            "value": "#7d7d7d",
+            "type": "color"
+        },
+        {
+            "name": "Button Background",
+            "property": "button-background",
+            "value": "#4f545c",
+            "type": "color"
+        },
+        {
+            "name": "Button Border",
+            "property": "button-border",
+            "value": "#404040",
+            "type": "color"
+        },
+        {
+            "name": "UI Color",
+            "property": "ui-color",
+            "value": "#226df4",
+            "type": "color"
+        },
+        {
+            "name": "UI Hover Color",
+            "property": "ui-hover-color",
+            "value": "#238aff",
+            "type": "color"
+        },
+        {
+            "name": "UI Danger Color",
+            "property": "ui-danger-color",
+            "value": "#ff3b3b",
+            "type": "color"
+        },
+        {
+            "name": "UI Danger Hover",
+            "property": "ui-danger-hover",
+            "value": "#ff5454",
+            "type": "color"
+        },
+        {
+            "name": "Submit Button Border",
+            "property": "submit-btn-border",
+            "value": "#b1b1b1",
+            "type": "color"
+        }
+    ]
 }

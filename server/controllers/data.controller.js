@@ -2,6 +2,7 @@ import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import defaultConfig from "../defaultConfig.json" assert { type: "json" };
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -9,7 +10,10 @@ class DataController {
     async changeConfig(req, res) {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
-            await db.run("UPDATE user SET config=?", [ JSON.stringify(req.body) ]);
+            const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
+            const newConfig = req.body.updateOnly ? {...config, ...req.body.config} : req.body.config;
+
+            await db.run("UPDATE user SET config=?", [ JSON.stringify(newConfig) ]);
             await db.close();
             res.send({ success: true });
         } catch(err) {
@@ -34,11 +38,28 @@ class DataController {
             console.error(err);
         }
     }
+
+    async resetStyles(req, res) {
+        const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
+        try {
+            const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
+
+            await db.run("UPDATE user SET config=?", [ JSON.stringify({ ...config, styles: defaultConfig.styles }) ]);
+            await db.close();
+            res.send({ success: true });
+        } catch(err) {
+            try {
+                await db.close();
+            } catch {}
+            res.send({ success: false, data: "Changing config error" });
+            console.error(err);
+        }
+    }
     async changeLogo(req, res) {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
-            const { config } = (await db.get("SELECT config FROM user")) || {}; 
-            await db.run("UPDATE user SET config=?", [ JSON.stringify({ ...JSON.parse(config), customLogo: true }) ]);
+            const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
+            await db.run("UPDATE user SET config=?", [ JSON.stringify({ ...config, customLogo: true }) ]);
             await db.close();
             res.send({ success: true });
         } catch(err) {
@@ -53,9 +74,9 @@ class DataController {
     async getConfig(req, res) {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
-            const { config } = (await db.get("SELECT config FROM user")) || {};
+            const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
             await db.close();
-            res.send({ success: true, data: config });
+            res.send({ success: true, data: JSON.stringify(config) });
         } catch(err) {
             try {
                 await db.close();
@@ -63,6 +84,9 @@ class DataController {
             res.send({ success: false, data: "Getting config error" });
             console.error(err);
         }
+    }
+    async getStyles(req, res) {
+        res.sendFile('/server/assets/styles.json', { root: '.' });
     }
     async getLogo(req, res) {
         try {

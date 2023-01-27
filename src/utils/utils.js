@@ -16,10 +16,13 @@ export async function checkAuth() {
     return result?.success && result.data;
 }
 
-export async function updateConfig(values) {
+export async function updateConfig(values, updateOnly) {
     const result = await fetch('/api/data/change-config', {
         method: "POST",
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+            config: values,
+            updateOnly
+        }),
         headers: {
             "Content-type": "application/json"
         }
@@ -67,4 +70,18 @@ export async function resetAll() {
 
 export function getLogo() {
     return '/api/data/get-logo';
+}
+
+export function redefineStyle(property, value) {
+    document.documentElement.style.setProperty("--" + property, value);
+}
+
+export async function resetStyles () {
+    await fetch('/api/data/reset-styles', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    .then(res => res.json());
 }

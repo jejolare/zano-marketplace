@@ -16,13 +16,13 @@ function Input(props) {
                 if (!selectorOpen || popupRef.current.contains(e.target)) return;
                 setSelectorState(false);
             }
-            document.addEventListener('click', handleClick);  
-            return () => document.removeEventListener('click', handleClick);
-        });
+            window.addEventListener('mousedown', handleClick);  
+            return () => window.removeEventListener('mousedown', handleClick);
+        }, []);
 
-        const options = props.options ? ['Not selected', ...(props.options || [])] : undefined;
+        const options = props.options ? [(props.noInput ? '' : 'Not selected'), ...(props.options || [])] : undefined;
 
-        const filteredData = options.filter(e => e.includes(props.value));
+        const filteredData = options.filter(e => props.noInput ? e : e.includes(props.value));
 
         return (
             <div className="ui__input__options" ref={popupRef}>
@@ -47,7 +47,7 @@ function Input(props) {
                 className={(props.options ? ' ui__input__select' : '')} 
                 type={props.type || "text"}
                 placeholder={props.placeholder} 
-                onInput={e => props.setValue(e.target.value)}
+                onInput={e => props.noInput ? '' : props.setValue(e.target.value)}
                 value={props.value}
                 onClick={(e) => {
                     if (props.options) {
@@ -55,6 +55,7 @@ function Input(props) {
                         setSelectorState(true);
                     }
                 }}
+                {...props.attributes}
             />
             {props.options &&
                 <img 

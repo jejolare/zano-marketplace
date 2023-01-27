@@ -63,7 +63,7 @@ function General(props) {
                 <p>Logo</p>
                 <ImageUploader value={logo} setValue={setLogo}/>
                 <p>Change password</p>
-                <Input placeholder="type new password" value={password} setValue={setPassword}/>
+                <Input placeholder="type new password" value={password} setValue={setPassword} type="password"/>
                 <div className="ui__form__switch">
                     <Switch value={allowPosts} setValue={setPostsState}/>
                     <p>Allow everyone to post new offers</p>

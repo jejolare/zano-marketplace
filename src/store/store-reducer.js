@@ -3,7 +3,9 @@ import { createContext, useReducer } from "react";
 const initialState = {
   isPrepared: true,
   isAdmin: false,
-  config: {}
+  config: {
+    styles: []
+  },
 }
 
 

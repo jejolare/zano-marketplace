@@ -2,6 +2,7 @@ import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import sha256 from "sha256";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -9,7 +10,7 @@ class Middleware {
     async checkToken(req, res, next) {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
-            const user = await db.get("SELECT * FROM user WHERE token=?", [req.cookies.token]);
+            const user = await db.get("SELECT * FROM user WHERE token=?", [sha256(req.cookies.token || '')]);
             await db.close();
             if (next) {
                 if (user) {

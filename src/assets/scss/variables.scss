@@ -1,14 +1,31 @@
-$default-background: #222222;
-$wrapper-background: #2c2c2c;
-$input-background: #444444;
-$input-border: #555555;
-$default-font-size: 20px;
-$default-text: #ffffff;
-$default-placeholder: #7d7d7d;
-$button-background: #4f545c;
-$button-border: #b9b9b94d;
-$ui-color: #226df4;
-$ui-hover-color: #238aff;
-$ui-danger-color: #ff3b3b;
-$ui-danger-hover: #ff5454;
-$submit-btn-border: #b1b1b1;
+:root {
+    --default-background: #222222;
+    --wrapper-background: #2c2c2c;
+    --input-background: #444444;
+    --input-border: #555555;
+    --default-font-size: 20px;
+    --default-text: #ffffff;
+    --default-placeholder: #7d7d7d;
+    --button-background: #4f545c;
+    --button-border: #b9b9b94d;
+    --ui-color: #226df4;
+    --ui-hover-color: #238aff;
+    --ui-danger-color: #ff3b3b;
+    --ui-danger-hover: #ff5454;
+    --submit-btn-border: #b1b1b1;
+}
+
+$default-background: var(--default-background); 
+$wrapper-background: var(--wrapper-background);
+$input-background: var(--input-background);
+$input-border: var(--input-border);
+$default-font-size: var(--default-font-size);
+$default-text: var(--default-text);
+$default-placeholder: var(--default-placeholder);
+$button-background: var(--button-background);
+$button-border: var(--button-border);
+$ui-color: var(--ui-color);
+$ui-hover-color: var(--ui-hover-color);
+$ui-danger-color: var(--ui-danger-color);
+$ui-danger-hover: var(--ui-danger-hover);
+$submit-btn-border: var(--submit-btn-border);

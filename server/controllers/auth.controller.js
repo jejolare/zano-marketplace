@@ -1,6 +1,6 @@
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
-import { dirname } from 'path';
+import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import generateString from "../generateString.js";
 import sha256 from "sha256";
@@ -37,9 +37,10 @@ class AuthController {
                     req.body.nickname, 
                     hash, 
                     salt, 
-                    token,
+                    sha256(token),
                     JSON.stringify(defaultConfig) 
                 ]);
+
                 res.send({ success: true, data: token });
             }
             await db.close();
@@ -56,12 +57,15 @@ class AuthController {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
             const user = await db.get("SELECT * FROM user WHERE nickname=?", [req.body.nickname]);
-            await db.close();
             if (user && sha256(req.body.password + user.salt) == user.hash) {
-                res.send({ success: true, token: user.token });
+                const token = generateString(24);
+                await db.run("UPDATE user SET token=?", [sha256(token)]);
+                
+                res.send({ success: true, token: token });
             } else {
                 res.send({ success: false, data: "Wrong nickname or password" });
             }
+            await db.close();
         } catch(err) {
             try {
                 await db.close();
