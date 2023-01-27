@@ -23,8 +23,8 @@
 .ui__form {
     width: 670px;
     padding: 60px;
-    background-color: $wrapper-background;
-    border: 1px solid $input-border;
+    background-color: var(--wrapper-background);
+    border: 1px solid var(--input-border);
     border-radius: 7px;
 
     @media screen and (max-width: 1350px), (max-height: 800px) {
@@ -37,10 +37,10 @@
     }
 
     p {
-        font-size: $default-font-size;
+        font-size: var(--default-font-size);
         margin-bottom: 10px;    
         @media screen and (max-height: 900px) {
-            font-size: calc($default-font-size / 1.2)
+            font-size: calc(var(--default-font-size) / 1.2)
         }
     }
     h3 {

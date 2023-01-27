@@ -10,8 +10,8 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px 50px;
-    background-color: $wrapper-background;
-    border-bottom: 1px solid $input-border;
+    background-color: var(--wrapper-background);
+    border-bottom: 1px solid var(--input-border);
     
     @media screen and (max-width : 1650px) {
         padding: 15px 35px;
@@ -34,11 +34,11 @@ header {
         padding-top: 15px;
         padding-bottom: 15px;
         padding-left: 53px;
-        background-color: $input-background;
+        background-color: var(--input-background);
         background-image: url(../../assets/images/UI/search.svg);
         background-repeat: no-repeat;
         background-position: 15px 50%;
-        border: 1px solid $input-border;
+        border: 1px solid var(--input-border);
         border-radius: 6px;
         width: 1300px;
         

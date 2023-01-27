@@ -7,16 +7,16 @@
     outline: none;
     box-sizing: border-box;
     font-family: "Montserrat";
-    font-size: $default-font-size;
-    color: $default-text;
+    font-size: var(--default-font-size);
+    color: var(--default-text);
     transition: all 0.3s;
     ::placeholder { 
-        color: $default-placeholder;
+        color: var(--default-placeholder);
     }
 }
 
 html, body {
-    background-color: $default-background;
+    background-color: var(--default-background);
 }
 
 @font-face {
