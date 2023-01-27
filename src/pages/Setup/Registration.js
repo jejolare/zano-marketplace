@@ -48,7 +48,7 @@ function Registration() {
         updateMarketState(dispatch, true);
         updateAdminState(dispatch, true);
         console.log('ok');
-        navigate('/admin');
+        navigate(0);
     }
     return (
         <>

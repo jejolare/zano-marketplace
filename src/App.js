@@ -42,7 +42,7 @@ function App() {
         .then(json => JSON.parse(json.data || '{}'));
         
         updateConfigState(dispatch, configJson);
-        for (const iterator of configJson.styles) {
+        for (const iterator of (configJson.styles || [])) {
           redefineStyle(iterator.property, iterator.value);
         }
     }
