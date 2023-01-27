@@ -116,6 +116,12 @@
         input {
             margin-bottom: 0;
         }
+        > * {
+            width: 45%;
+            @media screen and (max-width: 1350px), (max-height: 800px) {
+                width: 100%;
+            }
+        }
     }
 
     .ui__form__header {
