@@ -81,25 +81,29 @@
     .ui__input__price input {
         @include inputWithImage(240px);
         padding-right: 105px;
-        background-image: url(../../assets/images/UI/zano.svg);
+        // background-image: url(../../assets/images/UI/zano.svg);
         margin-bottom: 0;
     }
     .ui__input__author input {
         @include inputWithImage(240px);
-        background-image: url(../../assets/images/UI/email.svg);
+        // background-image: url(../../assets/images/UI/email.svg);
         background-size: 20px 20px;
     }
     .ui__input__image input {
         @include inputWithImage;
-        background-image: url(../../assets/images/UI/gallery.png);
+        // background-image: url(../../assets/images/UI/gallery.svg);
     }
     .ui__input__comments input {
         @include inputWithImage;
-        background-image: url(../../assets/images/UI/comments.svg);
+        // background-image: url(../../assets/images/UI/comments.svg);
     }
     .ui__input__wrapper {
         div {   
             position: relative;
+        }
+
+        .ui__input__asset {
+            color: var(--button-text);
         }
     } 
     .ui__image-loader {

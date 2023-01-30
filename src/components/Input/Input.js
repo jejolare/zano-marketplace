@@ -70,6 +70,7 @@ function Input(props) {
                     onClick={handlerInputClick}
                 />
             }
+            {props.children}
             {selectorOpen && <Selector/>}
         </div>
     );
