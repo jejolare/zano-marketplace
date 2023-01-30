@@ -15,7 +15,7 @@
         max-height: 90%;
     }
     span {
-        font-size: 128px;
+        font-size: calc(var(--default-font-size) * 6.4);
         line-height: 100%;
         margin: 0;
     }

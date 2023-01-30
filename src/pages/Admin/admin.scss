@@ -3,7 +3,7 @@
     bottom: 20px;
     right: 20px;
     opacity: 0.5;
-    font-size: 14px;
+    font-size: calc(var(--default-font-size) * 0.7);
     padding: 10px;
     pointer-events: all;
 }
@@ -29,13 +29,13 @@
             li {
                 font-weight: 600;
                 a, div {
-                    font-size: 28px;
+                    font-size: calc(var(--default-font-size) * 1.4);
                     line-height: 100%;
                     @media screen and (max-width: 1600px) {
-                        font-size: 20px;
+                        font-size: var(--default-font-size);
                     }
                     @media screen and (max-width: 900px) {
-                        font-size: 16px;
+                        font-size: calc(var(--default-font-size) * 0.8);
                     }
                 }
                 div {

@@ -11,10 +11,10 @@
         transform: scale(1.015);
     }
     h6 {
-        font-size: 16px;
+        font-size: calc(var(--default-font-size) * 0.8);
     }
     h5 {
-        font-size: 24px;
+        font-size: calc(var(--default-font-size) * 1.2);
     }
     .ui__card__exp-info {
         display: flex;
