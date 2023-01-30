@@ -1,5 +1,5 @@
 import cardImg from "../../assets/images/temp/Bitcoin.svg.png";
-import currencyImg from "../../assets/images/UI/zano.svg";
+import { ReactComponent as CurrencyImg } from "../../assets/images/UI/zano.svg";
 import "./card.scss";
 
 function Card() {
@@ -27,7 +27,7 @@ function Card() {
                     <div>
                         <p>test</p>
                         <div className="ui__card__price">
-                            <img src={currencyImg} alt="Zano" />
+                            <CurrencyImg />
                             <p>1000</p>
                             <p className="ui__card__currency">ZANO</p>
                         </div>

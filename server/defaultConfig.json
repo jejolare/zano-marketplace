@@ -52,10 +52,28 @@
             "type": "color"
         },
         {
+            "name": "Button Background Hover",
+            "property": "button-background-hover",
+            "value": "#238aff",
+            "type": "color"
+        },
+        {
+            "name": "Button Text",
+            "property": "button-text",
+            "value": "#ffffff",
+            "type": "color"
+        },
+        {
             "name": "Button Border",
             "property": "button-border",
             "value": "#404040",
             "type": "color"
+        },
+        {
+            "name": "Icons Color",
+            "property": "icons-color",
+            "value": "#ffffff",
+            "type": "color" 
         },
         {
             "name": "UI Color",
