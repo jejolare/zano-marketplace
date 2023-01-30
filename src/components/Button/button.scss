@@ -2,7 +2,7 @@
 
 .ui__button {
     
-    background-color: var(--ui-color);
+    background-color: var(--button-background);
     border: 1px solid var(--button-border);
     border-radius: 4px;
     // width: 200px;
@@ -29,7 +29,7 @@
 .ui__submit-btn {
     width: 100%;
     height: 60px;
-    background-color: var(--ui-color);
+    background-color: var(--button-background);
     &:hover {
         background-color: var(--ui-hover-color);
     }

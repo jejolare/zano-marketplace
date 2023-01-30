@@ -76,6 +76,10 @@ class DataController {
         try {
             const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
             await db.close();
+            if (!config.styles) {
+                res.send({ success: true, data: JSON.stringify(defaultConfig) });
+                return;
+            }
             res.send({ success: true, data: JSON.stringify(config) });
         } catch(err) {
             try {
@@ -85,9 +89,7 @@ class DataController {
             console.error(err);
         }
     }
-    async getStyles(req, res) {
-        res.sendFile('/server/assets/styles.json', { root: '.' });
-    }
+    
     async getLogo(req, res) {
         try {
             res.sendFile('/server/assets/logo.png', { root: '.' });
