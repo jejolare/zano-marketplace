@@ -6,6 +6,7 @@ const initialState = {
   config: {
     styles: []
   },
+  search: ''
 }
 
 
@@ -17,6 +18,8 @@ const reducer = (state, action) => {
           return { ...state, isAdmin: action.payload };
         case "CONFIG_UPDATED":
           return { ...state, config: action.payload };
+        case "SEARCH_UPDATED":
+          return { ...state, search: action.payload };
         default:
           return { ...state };
     }

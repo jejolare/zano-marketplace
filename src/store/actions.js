@@ -17,3 +17,10 @@ export const updateConfigState = (dispatch, state) => {
         payload: state,
     });
 }
+
+export const updateSearchState = (dispatch, state) => {
+    return dispatch({
+        type: "SEARCH_UPDATED",
+        payload: state,
+    });
+}

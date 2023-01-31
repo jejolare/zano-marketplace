@@ -2,6 +2,17 @@
     "title": "Zano",
     "subtitle": "Marketplace",
     "allowPosts": true,
+    "filters": {
+        "category": "",
+        "locationCountry": "",
+        "locationCity": "",
+        "sort": "Publication date",
+        "offersPerPage": 100,
+        "minDate": "",
+        "maxDate": "",
+        "minPrice": 0,
+        "maxPrice": 0
+    },
     "styles": [
         {
             "name": "Default Background",

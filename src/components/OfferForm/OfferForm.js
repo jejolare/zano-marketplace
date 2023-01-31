@@ -10,7 +10,9 @@ function OfferForm(props) {
                     {props.children}
                 </div>
             </Form>
-            <Card />
+            <Card 
+                {...props.params}
+            />
         </main>
     );
 }

@@ -4,9 +4,42 @@
     background-color: var(--wrapper-background);
     border-radius: 7px;
     width: 100%;
-    height: 420px;
     margin: auto;
-    cursor: pointer;
+    // cursor: pointer;
+    position: relative;
+
+    .ui__card__actions__delete, .ui__card__comment__btn {
+        width: 30px;
+        height: 30px;
+        background-color: var(--ui-danger-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        svg {
+            height: 60%;
+        }
+        * {
+            fill: var(--icons-color);
+        }
+    }
+    
+    .ui__card__comment__btn {
+        width: 40px;
+        height: 40px;
+        background-color: var(--input-background);
+        left: 10px;
+        top: 10px;
+        cursor: pointer;
+    }
+
+    * {
+        text-overflow: ellipsis;
+    }
+
     &:hover {
         transform: scale(1.015);
     }
@@ -15,6 +48,34 @@
     }
     h5 {
         font-size: calc(var(--default-font-size) * 1.2);
+    }
+
+    h5, .ui__card__main-info__category, .ui__card__main-info__description, .ui__card__author a, .ui__card__price p:nth-child(2) {
+        width: 180px;
+        overflow:hidden;
+        white-space:nowrap;
+        @media screen and (max-width: 400px) {
+            width: 160px;
+        }
+    }
+    .ui__card__author a {
+        width: 150px;
+        text-align: right;
+    }
+
+    .ui__card__price p:nth-child(2) {
+        width: 55px;
+    }
+
+    .ui__card__main-info__description {
+        width: 300px;
+        position: absolute;
+        top: -5px;
+        transform: translate(0, -100%);
+    }
+    .ui__card__details {
+        position: relative;
+        margin-top: 45px !important;
     }
     .ui__card__exp-info {
         display: flex;
@@ -44,10 +105,13 @@
         flex-direction: column;
         padding: 25px;
         .ui__card__main-info {
+
+
             display: flex;
             justify-content: space-between;
             > div {
                 display: flex;
+                float:left;
                 flex-direction: column;
             }
             &:not(:first-child) {
@@ -76,9 +140,32 @@
         .ui__card__currency, .ui__card__author a {
             color: var(--ui-color);
             font-weight: 700;
+            margin-right: 10px;
         }
-        .ui__card__author a:hover {
-            color: var(--ui-hover-color);
+        .ui__card__author a  {
+            margin-right: 0 !important;
         }
+        .ui__card__author {
+            a:hover {
+                color: var(--ui-hover-color);
+            }
+        }
+    }
+}
+
+.ui__card__comment__content {
+    padding: 30px;
+    width: 500px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    background-color: var(--wrapper-background);
+
+    .ui__card__comment__data {
+        overflow: auto;
+        line-height: 150%;
+        max-height: 240px;
     }
 }

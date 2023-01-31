@@ -16,6 +16,8 @@ function Filters(props) {
     const [locationCity, setLocationCity] = useState(config?.filters?.locationCity || '');
     const [sort, setSort] = useState(config?.filters?.sort || 'Publication date');   
     const [offersPerPage, setOffersPerPage] = useState(config?.filters?.offersPerPage || 50);   
+    const [minimumPrice, setMinimumPrice] = useState(config?.filters?.minPrice || '');   
+    const [maximumPrice, setMaximumPrice] = useState(config?.filters?.maxPrice || '');   
 
     const [minDate, setMinDate] = useState(config?.filters?.minDate || '');   
     const [maxDate, setMaxDate] = useState(config?.filters?.maxDate ||'');   
@@ -28,7 +30,9 @@ function Filters(props) {
                 locationCountry,
                 locationCity,
                 sort,
-                offersPerPage : parseInt(offersPerPage, 10),
+                offersPerPage : parseInt(offersPerPage, 10) || 100,
+                minPrice: parseInt(minimumPrice, 10) || 0,
+                maxPrice: parseInt(maximumPrice, 10) || 0,
                 minDate,
                 maxDate
             }
@@ -45,21 +49,18 @@ function Filters(props) {
                 </div>
                 <p>By category</p>
                 <Input 
-                    options={[]} 
                     value={category} 
                     setValue={setCategory} 
                     placeholder="Not selected"
                 />
                 <p>By location Country</p>
                 <Input 
-                    options={[]} 
                     placeholder="Not selected" 
                     value={locationCountry} 
                     setValue={setLocationCountry}
                 />
                 <p>By location City</p>
                 <Input 
-                    options={[]} 
                     placeholder="Not selected"
                     value={locationCity} 
                     setValue={setLocationCity}
@@ -69,6 +70,27 @@ function Filters(props) {
                     value={offersPerPage} 
                     setValue={setOffersPerPage}
                     type="number"
+                    placeholder="Default: 100"
+                    attributes={{
+                        min: "1"
+                    }}
+                />
+                <p>Minimum offer price (ZANO)</p>
+                <Input 
+                    value={minimumPrice} 
+                    setValue={setMinimumPrice}
+                    type="number"
+                    placeholder="Not selected"
+                    attributes={{
+                        min: "1"
+                    }}
+                />
+                <p>Maximum offer price (ZANO)</p>
+                <Input 
+                    value={maximumPrice} 
+                    setValue={setMaximumPrice}
+                    type="number"
+                    placeholder="Not selected"
                     attributes={{
                         min: "1"
                     }}

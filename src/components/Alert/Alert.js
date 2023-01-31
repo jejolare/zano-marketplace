@@ -5,7 +5,12 @@ function Alert(props) {
 
     function PopupContent() {
         return (
-            <div className="ui__alert">{props.value}</div>
+            <div 
+                className="ui__alert" 
+                style={{ 'background': props.type === "success" ? "#35c935e6" : undefined }}
+            >
+                {props.value}
+            </div>
         );
     }
 

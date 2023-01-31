@@ -11,7 +11,7 @@ function Logo(props) {
         <Link to={'/'}>
             <div className="ui__logo">
                 <div className="ui__logo__img">
-                    <img src={config.customLogo ? '/api/data/get-logo' : logoImg} alt="Logo" />
+                    <img src={config.customLogo ? getLogo() : logoImg} alt="Logo" />
                 </div>
                 <div className="ui__logo__title">
                     <h4>{config.title}</h4>

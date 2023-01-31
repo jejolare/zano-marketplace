@@ -12,3 +12,23 @@
 .popup_no-pointer {
     pointer-events: none;
 }
+.popup__close {
+    background-color: var(--ui-danger-color);
+    position: fixed;
+    right: -5px;
+    top: -5px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    svg {
+        height: 60%;
+        fill: var(--icons-color);
+    }
+    &:hover {
+        background-color: var(--ui-danger-hover);
+    }
+}

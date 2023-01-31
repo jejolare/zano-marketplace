@@ -1,9 +1,9 @@
 import React, { Suspense, useEffect, useContext } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import './App.scss';
 import { isTemplatePrepared, checkAuth, redefineStyle } from "./utils/utils";
 import { Store } from "./store/store-reducer";
-import { updateMarketState, updateAdminState, updateConfigState, updateStylesState } from "./store/actions";
+import { updateMarketState, updateAdminState, updateConfigState } from "./store/actions";
 import AdminHandler from "./pages/Admin/AdminHandler";
 
 const MainPage = React.lazy(() => import('./pages/Main/Main'));
@@ -49,6 +49,19 @@ function App() {
     getConfig();
   }, [state.isPrepared]);
 
+  function RouteStylesHandler() {
+
+    const location = useLocation();
+
+    useEffect(() => {
+      for (const iterator of (state.config?.styles || [])) {
+        redefineStyle(iterator.property, iterator.value);
+      }
+    }, [location.pathname]);
+
+    return (<></>);
+  }
+
   return (
     <div className="App">
       <Router>
@@ -67,6 +80,7 @@ function App() {
               <Route exact path="/*" element={<SetupPage/>}/>
             }
           </Routes>
+          <RouteStylesHandler/>
           <AdminHandler/>
          </Suspense> 
       </Router>
