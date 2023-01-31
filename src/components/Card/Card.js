@@ -18,7 +18,7 @@ function Card(props) {
 
     const noPhoto = state.config.customLogo ? getLogo() : logoImg;
     const contact = props.contact || '@your_contacts';
-    const comment = props.comment ||"Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, minus tenetur recusandae accusamus commodi numquam tempora ea ratione, nesciunt facilis fuga aperiam dolorum? Iste quia qui laboriosam deleniti dolorem impedit. ";
+    const comment = props.comment || "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, minus tenetur recusandae accusamus commodi numquam tempora ea ratione, nesciunt facilis fuga aperiam dolorum? Iste quia qui laboriosam deleniti dolorem impedit. ";
 
     async function copy(e) {
         e.preventDefault();
