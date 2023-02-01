@@ -5,6 +5,7 @@ import DateInput from "../../../components/DateInput/DateInput";
 import { useState } from "react";
 import { updateConfig } from "../../../utils/utils";
 import { useNavigate } from "react-router-dom";
+import Switch from "../../../components/Switch/Switch";
 
 function Filters(props) {
 
@@ -21,6 +22,7 @@ function Filters(props) {
 
     const [minDate, setMinDate] = useState(config?.filters?.minDate || '');   
     const [maxDate, setMaxDate] = useState(config?.filters?.maxDate ||'');   
+    const [reverse, setReverse] = useState(config?.filters?.reverse || false);   
 
     
     async function saveFilters() {
@@ -34,7 +36,8 @@ function Filters(props) {
                 minPrice: parseInt(minimumPrice, 10) || 0,
                 maxPrice: parseInt(maximumPrice, 10) || 0,
                 minDate,
-                maxDate
+                maxDate,
+                reverse
             }
         }, true);
         navigate(0);
@@ -47,7 +50,7 @@ function Filters(props) {
                     <h3>Filters</h3>
                     <p>Edit filters of your marketplace</p>
                 </div>
-                <p>By category</p>
+                <p>Offer will be visible if the category includes this text</p>
                 <Input 
                     value={category} 
                     setValue={setCategory} 
@@ -114,6 +117,10 @@ function Filters(props) {
                     setValue={setSort}
                     noInput={true}
                 />
+                <div className="ui__form__switch">
+                    <Switch value={reverse} setValue={setReverse}/>
+                    <p>Reverse sort</p>
+                </div>
                 <Button className="ui__submit-btn" onMouseUp={saveFilters}>Save</Button>
             </Form>
         </div>

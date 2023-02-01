@@ -19,11 +19,18 @@
         position: absolute;
         top: -10px;
         right: -10px;
+        cursor: pointer;
         svg {
             height: 60%;
         }
         * {
             fill: var(--icons-color);
+        }
+    }
+    .ui__card__actions__show {
+        background-color: var(--ui-color);
+        svg {
+            width: 70%;
         }
     }
     
@@ -47,7 +54,7 @@
         font-size: calc(var(--default-font-size) * 0.8);
     }
     h5 {
-        font-size: calc(var(--default-font-size) * 1.2);
+        font-size: calc(var(--default-font-size));
     }
 
     h5, .ui__card__main-info__category, .ui__card__main-info__description, .ui__card__author a, .ui__card__price p:nth-child(2) {
@@ -90,6 +97,7 @@
         width: 100%;
         height: 250px;
         overflow: hidden;
+        user-select: none;
         position: relative;
         img {
             position: absolute;

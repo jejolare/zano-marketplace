@@ -2,6 +2,9 @@
     "title": "Zano",
     "subtitle": "Marketplace",
     "allowPosts": true,
+    "ports": [
+        "10000"
+    ],
     "filters": {
         "category": "",
         "locationCountry": "",
@@ -11,7 +14,8 @@
         "minDate": "",
         "maxDate": "",
         "minPrice": 0,
-        "maxPrice": 0
+        "maxPrice": 0,
+        "reverse": true
     },
     "styles": [
         {

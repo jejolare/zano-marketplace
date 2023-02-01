@@ -18,6 +18,7 @@ function General(props) {
     const [password, setPassword] = useState('');
     const [allowPosts, setPostsState] = useState(config?.allowPosts || false);
     const [noSearch, setSearchState] = useState(config?.noSearch || false);
+    const [ports, setPorts] = useState(config?.ports?.join(', ') || '');
     const [logo, setLogo] = useState();
 
 
@@ -42,7 +43,7 @@ function General(props) {
     }
 
     async function resetSettings() {
-        const sure = window.confirm('are you sure? You will reset all your settings');
+        const sure = window.confirm('are you sure? You will reset all your settings and STORAGE OF HIDDEN OFFERS');
         if (sure) {
             await resetAll();
             navigate(0);
@@ -68,6 +69,13 @@ function General(props) {
                     <Switch value={allowPosts} setValue={setPostsState}/>
                     <p>Allow everyone to post new offers</p>
                 </div>
+                {!allowPosts &&
+                    <>
+                        <p>Your wallets ports (ex: port1, port2, port3)</p>
+                        <Input placeholder="" value={ports} setValue={setPorts}/>
+                    </>
+                }
+
                 <div className="ui__form__switch">
                     <Switch value={noSearch} setValue={setSearchState}/>
                     <p>Remove search from header menu </p>

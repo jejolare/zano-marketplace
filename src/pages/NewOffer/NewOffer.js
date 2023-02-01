@@ -10,6 +10,7 @@ import { ReactComponent as CommentsImg } from "../../assets/images/UI/comments.s
 import { ReactComponent as ZanoImg } from "../../assets/images/UI/zano.svg";
 import { ReactComponent as EmailImg } from "../../assets/images/UI/email.svg";
 import { submitNewOffer } from "../../utils/rpc";
+import sha256 from "sha256";
 
 function NewOffer() {
 
@@ -35,8 +36,21 @@ function NewOffer() {
 
 
     async function submit() {
+        const usersOffers = JSON.parse(localStorage.getItem('my-offers') || '[]');
+
+        const paramsString = [
+            paramsData.title,
+            paramsData.category,
+            paramsData.description,
+            paramsData.contact,
+            paramsData.image,
+            paramsData.comment
+        ].join(', ')
+
+        usersOffers.push(sha256(paramsString));
+        localStorage.setItem('my-offers', JSON.stringify(usersOffers));
+
         await submitNewOffer(paramsData);
-        // navigate(0);
     }
 
     return (

@@ -6,15 +6,30 @@ import { useContext, useState } from "react";
 import logoImg from "../../assets/images/UI/logo.png";
 import Alert from "../../components/Alert/Alert";
 import { ReactComponent as DeleteImg } from '../../assets/images/UI/delete.svg';
+import { ReactComponent as ShowImg } from '../../assets/images/UI/show.svg';
 import { ReactComponent as TooltipImg } from '../../assets/images/UI/tooltip.svg';
 import { ReactComponent as CloseImg } from '../../assets/images/UI/close.svg';
 import Popup from "../Popup/Popup";
+import { hideOffer, showOffer as showOfferRequest } from "../../utils/utils";
+import { useNavigate } from "react-router-dom";
+import sha256 from "sha256";
+import { updateConfigState } from "../../store/actions";
 
 function Card(props) {
 
-    const { state } = useContext(Store);
+    const { state, dispatch } = useContext(Store);
     const [errorValue, setError] = useState(undefined);    
     const [popupOpen, setPopupState] = useState(false);
+    const navigate = useNavigate();
+
+    const paramsString = [
+        props.title,
+        props.category,
+        props.description,
+        props.contact,
+        props.image,
+        props.comment
+    ].join(', ');
 
     const noPhoto = state.config.customLogo ? getLogo() : logoImg;
     const contact = props.contact || '@your_contacts';
@@ -43,14 +58,39 @@ function Card(props) {
         );
     }
 
+    async function cancelOffer() {
+        const hiddenOffers = (await hideOffer(sha256(paramsString))).data;
+        updateConfigState(dispatch, { ...state.config, hiddenOffers: hiddenOffers });
+    }
+
+    async function showOffer() {
+        const hiddenOffers = (await showOfferRequest(sha256(paramsString))).data;
+        updateConfigState(dispatch, { ...state.config, hiddenOffers: hiddenOffers });
+    }
+
+
+    const isHidden = state.config?.hiddenOffers?.includes(sha256(paramsString));
+
+    if (isHidden && !props.allowAction) {
+        return <></>;
+    }
+
     return (
         <div className="ui__card">
-            <div className="ui__card__background">
+            <div className="ui__card__background" style={{ 'opacity': isHidden && props.allowAction ? '0.6' : undefined }}>
                 <div className="ui__card__img">
-                    <img src={props.image || noPhoto} alt="Card" draggable={false}/>
+                    <img 
+                        src={props.image || noPhoto} 
+                        alt="Card" 
+                        draggable={false}
+                        onError={({ currentTarget }) => {
+                            currentTarget.onerror = null;
+                            currentTarget.src = noPhoto;
+                        }}
+                    />
                 </div>
             </div>
-            <div className="ui__card__info">
+            <div className="ui__card__info" style={{ 'opacity': isHidden && props.allowAction ? '0.6' : undefined }}>
 
                 <div className="ui__card__main-info">
                     <div>
@@ -86,9 +126,16 @@ function Card(props) {
             </div>
             {props.allowAction && 
                 <div className="ui__card__actions">
-                    <div className="ui__card__actions__delete">
-                        <DeleteImg/>
-                    </div>
+                    {!isHidden &&
+                        <div className="ui__card__actions__delete" onClick={() => cancelOffer()}>
+                            <DeleteImg/>
+                        </div>
+                    }
+                    {isHidden &&
+                        <div className="ui__card__actions__delete ui__card__actions__show" onClick={() => showOffer()}>
+                            <ShowImg/>
+                        </div>
+                    }
                 </div>
             }
             {comment && 

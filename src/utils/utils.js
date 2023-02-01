@@ -16,6 +16,34 @@ export async function checkAuth() {
     return result?.success && result.data;
 }
 
+export async function hideOffer(hash) {
+    const result = await fetch('/api/data/hide-offer', {
+        method: "POST",
+        body: JSON.stringify({
+            hash
+        }),
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    .then(res => res.json());
+    return result;
+}
+
+export async function showOffer(hash) {
+    const result = await fetch('/api/data/show-offer', {
+        method: "POST",
+        body: JSON.stringify({
+            hash
+        }),
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    .then(res => res.json());
+    return result;
+}
+
 export async function updateConfig(values, updateOnly) {
     const result = await fetch('/api/data/change-config', {
         method: "POST",
@@ -42,6 +70,22 @@ export async function uploadLogo(logo) {
     })
     .then(res => res.json());
     return result;
+}
+
+
+export async function getOwnerOffers(config) {
+    const result = await fetch('/api/data/get-offers', {
+        method: "POST",
+        body: JSON.stringify({
+            config
+        }),
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    .then(res => res.json());
+    console.log(result);
+    return { offers: result };
 }
 
 export async function updatePassword(value) {
