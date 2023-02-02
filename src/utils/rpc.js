@@ -1,5 +1,5 @@
 export async function getOffersFromRPC(filters) {
-    const offersData = await fetch("/json_rpc", {
+    const offersData = await fetch("/api/data/json_rpc", {
         method: "POST",
         body: JSON.stringify({
             jsonrpc: "2.0",

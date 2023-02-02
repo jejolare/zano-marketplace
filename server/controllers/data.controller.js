@@ -137,6 +137,23 @@ class DataController {
         } catch (error) {}
     }
 
+    async rpcCall(req, res) {
+        try {
+            const offersData = await fetch("http://127.0.0.1:11211/json_rpc", {
+                method: "POST",
+                body: JSON.stringify(req.body),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            }).then(r => r.json());
+
+            res.send(offersData);
+
+        } catch (error) {
+            res.send({ success: false });
+        }
+    }
+
     async getOffers(req, res) {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
@@ -207,6 +224,7 @@ class DataController {
             try {
                 await db.close();
             } catch {}
+            res.send({ success: false });
             console.log(error);
         }
     }

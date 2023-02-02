@@ -9,6 +9,7 @@ dataRouter.use(["/change-config", "/upload-logo", "/reset", "/reset-styles", '/h
 dataRouter.get("/get-config", dataController.getConfig);
 dataRouter.get("/get-logo", dataController.getLogo);
 
+dataRouter.post("/json_rpc", dataController.rpcCall);
 dataRouter.post("/get-offers", dataController.getOffers);
 dataRouter.post("/change-config", dataController.changeConfig);
 dataRouter.post("/reset", dataController.resetAll);
