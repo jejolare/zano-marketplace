@@ -138,8 +138,12 @@ class DataController {
     }
 
     async rpcCall(req, res) {
+        const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
-            const offersData = await fetch("http://127.0.0.1:11211/json_rpc", {
+            const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
+            await db.close();
+
+            const offersData = await fetch(`${config.walletPort}/json_rpc`, {
                 method: "POST",
                 body: JSON.stringify(req.body),
                 headers: {
@@ -150,6 +154,9 @@ class DataController {
             res.send(offersData);
 
         } catch (error) {
+            try {
+                await db.close();
+            } catch {}
             res.send({ success: false });
         }
     }
@@ -164,7 +171,7 @@ class DataController {
 
             async function getOffers(port, amount, offset) {
                 try {
-                    const offersData = await fetch(`http://127.0.0.1:${port}/json_rpc`, {
+                    const offersData = await fetch(`${port.replace(/.$/,"/")}json_rpc`, {
                         method: "POST",
                         body: JSON.stringify({
                             jsonrpc: "2.0",

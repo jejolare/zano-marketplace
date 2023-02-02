@@ -19,6 +19,7 @@ function General(props) {
     const [allowPosts, setPostsState] = useState(config?.allowPosts || false);
     const [noSearch, setSearchState] = useState(config?.noSearch || false);
     const [ports, setPorts] = useState(config?.ports?.join(', ') || '');
+    const [nodeLink, setNodeLink] = useState(config?.walletPort || '');
     const [logo, setLogo] = useState();
 
 
@@ -28,7 +29,9 @@ function General(props) {
             title,
             subtitle,
             allowPosts,
-            noSearch
+            noSearch,
+            ports: ports.split(', '),
+            walletPort: nodeLink
         });
 
         if (logo) {
@@ -71,8 +74,14 @@ function General(props) {
                 </div>
                 {!allowPosts &&
                     <>
-                        <p>Your wallets ports (ex: port1, port2, port3)</p>
+                        <p>Your wallets links (ex: url1, url2, url3)</p>
                         <Input placeholder="" value={ports} setValue={setPorts}/>
+                    </>
+                }
+                {allowPosts &&
+                    <>
+                        <p>Your Zanod link</p>
+                        <Input placeholder="" value={nodeLink} setValue={setNodeLink}/>
                     </>
                 }
 

@@ -3,8 +3,9 @@
     "subtitle": "Marketplace",
     "allowPosts": true,
     "ports": [
-        "10000"
+        "http://127.0.0.1:10000"
     ],
+    "walletPort": "http://127.0.0.1:11211",
     "filters": {
         "category": "",
         "locationCountry": "",
