@@ -17,11 +17,11 @@ function General(props) {
     const [subtitle, setSubtitle] = useState(config?.subtitle || '');
     const [password, setPassword] = useState('');
     const [allowPosts, setPostsState] = useState(config?.allowPosts || false);
+    const [useZanod, setZanodState] = useState(config?.zanod || false);
     const [noSearch, setSearchState] = useState(config?.noSearch || false);
     const [ports, setPorts] = useState(config?.ports?.join(', ') || '');
     const [nodeLink, setNodeLink] = useState(config?.walletPort || '');
     const [logo, setLogo] = useState();
-
 
     async function changeConfig() {
         await updateConfig({
@@ -30,6 +30,7 @@ function General(props) {
             subtitle,
             allowPosts,
             noSearch,
+            zanod: useZanod,
             ports: ports.split(', '),
             walletPort: nodeLink
         });
@@ -69,20 +70,28 @@ function General(props) {
                 <p>Change password</p>
                 <Input placeholder="Type new password" value={password} setValue={setPassword} type="password"/>
                 <div className="ui__form__switch">
-                    <Switch value={allowPosts} setValue={setPostsState}/>
-                    <p>Allow everyone to post new offers</p>
+                    <Switch value={useZanod} setValue={setZanodState}/>
+                    <p>Use Zano daemon</p> 
+                    {/* Allow everyone to post new offers */}
                 </div>
-                {!allowPosts &&
+                {!useZanod &&
                     <>
                         <p>Your wallets links (ex: url1, url2, url3)</p>
                         <Input placeholder="" value={ports} setValue={setPorts}/>
                     </>
                 }
-                {allowPosts &&
+                {useZanod &&
                     <>
                         <p>Your Zanod link</p>
                         <Input placeholder="" value={nodeLink} setValue={setNodeLink}/>
                     </>
+                }
+
+                {useZanod && 
+                    <div className="ui__form__switch">
+                        <Switch value={allowPosts} setValue={setPostsState}/>
+                        <p>Show "new offer" button to everyone</p> 
+                    </div>
                 }
 
                 <div className="ui__form__switch">

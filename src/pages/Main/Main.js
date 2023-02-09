@@ -71,7 +71,7 @@ function Main() {
             order_by: getOrder(state.config?.filters?.sort)
         };
 
-        const result = !state.config?.allowPosts ?  (await getOwnerOffers(config)) : (await getOffersFromRPC(config));
+        const result = !state.config?.zanod ?  (await getOwnerOffers(config)) : (await getOffersFromRPC(config));
 
         const cardsList = result.offers.map(e => ({
             title: decodeURI(e.t),

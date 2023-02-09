@@ -15,8 +15,15 @@
         font-weight: 700;
         border-radius: 4px;
         cursor: pointer;
+        height: 100%;
         svg {
-            height: 1.18em;
+            height: calc(var(--default-font-size) * 1.2);
+            @media screen and (max-width : 500px) {
+                height: calc(var(--default-font-size));
+            }
+            @media screen and (max-width : 400px) {
+                height: calc(var(--default-font-size) * 0.9);
+            }
         }
         &:hover {
             background-color: var(--button-background-hover);

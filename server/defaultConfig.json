@@ -2,6 +2,7 @@
     "title": "Zano",
     "subtitle": "Marketplace",
     "allowPosts": true,
+    "zanod": true,
     "ports": [
         "http://127.0.0.1:10000"
     ],
