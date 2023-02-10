@@ -140,7 +140,7 @@ function NewOffer() {
                     {!state.config?.projectId &&
                         <p className="offer-page__no-address">You cannot upload images because the marketplace owner has not enabled this option</p>
                     }
-                    <div className={state.config?.address ? '' : 'disabled disabled_full'}>
+                    <div className={state.config?.projectId ? '' : 'disabled disabled_full'}>
                         <ImageUploader setValue={uploadImage}/>
                     </div>
                 </div>
