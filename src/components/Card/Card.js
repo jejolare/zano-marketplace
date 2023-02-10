@@ -139,8 +139,9 @@ function Card(props) {
                         <a href="/" onClick={copy}>{contact}</a>
                     </div>
                 </div>
-                
-                <Button className="ui__card__buy-btn" onMouseUp={() => buyOffer(state.config?.address, props.title || 'Title')}>Buy</Button>
+                {state.config?.address &&
+                    <Button className="ui__card__buy-btn" onMouseUp={() => buyOffer(state.config?.address, props.title || 'Title')}>Buy</Button>
+                }
 
             </div>
             {props.allowAction && 

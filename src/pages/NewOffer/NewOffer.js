@@ -3,7 +3,7 @@ import Header from "../../components/Header/Header";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useContext } from "react";
 import OfferForm from "../../components/OfferForm/OfferForm";
 import { ReactComponent as CommentsImg } from "../../assets/images/UI/comments.svg";
 import { ReactComponent as ZanoImg } from "../../assets/images/UI/zano.svg";
@@ -15,9 +15,11 @@ import ImageUploader from "../../components/ImageUploader/ImageUploader";
 import { nanoid } from "nanoid";
 import { ReactComponent as DeleteImg } from '../../assets/images/UI/delete.svg';
 import { ReactComponent as ArrowImg } from '../../assets/images/UI/arrow.svg';
+import { Store } from "../../store/store-reducer";
 
 function NewOffer() {
 
+    const { state } = useContext(Store);
     const navigate = useNavigate();
 
     const [title, setTitle] = useState('');
@@ -132,7 +134,16 @@ function NewOffer() {
                 {/* <input type="file" name="file" ref={uploaderRef}/>
                 <button onClick={uploadImage}>Upload file</button> */}
                 <p>Images</p>
-                <ImageUploader setValue={uploadImage}/>
+                <div
+                    style={{ 'position': 'relative' }}
+                >
+                    {!state.config?.address &&
+                        <p className="offer-page__no-address">You cannot upload images because the marketplace owner has not enabled this option</p>
+                    }
+                    <div className={state.config?.address ? '' : 'disabled disabled_full'}>
+                        <ImageUploader setValue={uploadImage}/>
+                    </div>
+                </div>
                 <div className="offer-page__images">
                     {images.filter(e => e).map((e, i) => 
                         <UploadedImage 

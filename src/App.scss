@@ -82,6 +82,10 @@ input[type=number] {
     cursor: pointer;
 }
 .disabled {
+    user-select: none;
     pointer-events: none;
     opacity: 0.5;
+}
+.disabled_full {
+    opacity: 0.3;
 }

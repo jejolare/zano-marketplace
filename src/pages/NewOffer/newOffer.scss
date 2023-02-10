@@ -6,6 +6,7 @@
     align-items: flex-start;
     margin: 100px 300px;
 
+    
     @media screen and (max-width: 1820px) {
         margin: 100px 200px;
     }
@@ -30,6 +31,17 @@
         margin-bottom: 5px !important;
     }
 
+    .offer-page__no-address {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        font-weight: 700;
+        padding: 0 5px;
+    }
+    
     .ui__input__wrapper {
         .ui__input__asset {
             right: 0;
