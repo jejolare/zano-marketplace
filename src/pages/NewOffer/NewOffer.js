@@ -137,7 +137,7 @@ function NewOffer() {
                 <div
                     style={{ 'position': 'relative' }}
                 >
-                    {!state.config?.address &&
+                    {!state.config?.projectId &&
                         <p className="offer-page__no-address">You cannot upload images because the marketplace owner has not enabled this option</p>
                     }
                     <div className={state.config?.address ? '' : 'disabled disabled_full'}>
