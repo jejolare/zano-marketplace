@@ -15,7 +15,6 @@ const SetupPage = React.lazy(() => import('./pages/Setup/Setup'));
 function App() {
 
   const { state, dispatch } = useContext(Store);
-
   useEffect(() => {
     async function checkAppStatus() {
       const isPrepared = await isTemplatePrepared();

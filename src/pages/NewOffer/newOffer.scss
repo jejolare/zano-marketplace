@@ -47,6 +47,75 @@
         }
     }
 
+
+    .offer-page__image {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+        padding: 5px;
+        background-color: var(--input-background);
+        border-radius: 7px;
+        user-select: none;
+
+        .offer-page__image__wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            h4 {
+                margin-left: 20px;
+            }
+            > div {
+                border-radius: 7px;
+                border: 1px solid var(--input-border);
+                padding: 12px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 70px;
+                img {
+                    // height: 38px;
+                    max-height: 38px;
+                    max-width: 100%;
+                }
+            }
+        }
+
+        .offer-page__image__controllers {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            > div {
+                margin: 0 10px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: var(--button-background);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--button-background-hover);
+                }
+                svg {
+                    height: 60%;
+                    display: block;
+                    fill: var(--icons-color);
+                }
+            }
+            .offer-page__image__delete {
+                background-color: var(--ui-danger-color);
+                &:hover {
+                    background-color: var(--ui-danger-hover);
+                }
+            }
+        }
+
+    }
+    
     .ui__form {
         margin-right: 50px;
         @media screen and (max-width: 1150px) {

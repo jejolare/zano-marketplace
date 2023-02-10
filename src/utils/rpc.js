@@ -49,9 +49,14 @@ export async function submitNewOffer(params) {
     `&description='${params.description}'` +
     `&category='${params.category}'` +
     `&price=${params.price}` +
-    `&url='${params.image}'` +
+    `&url='${params.images}'` +
     `&contact='${params.contact}'` +
     `&comments='${params.comment}'`;
+
+  window.open(url,'_blank');
+}
+export async function buyOffer(address, title) {
+  const url = `zano:action=send&address=${address}&comment='Buying ${title}'&hide_sender=true&hide_receiver=true`
 
   window.open(url,'_blank');
 }

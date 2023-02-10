@@ -3,10 +3,13 @@
     "subtitle": "Marketplace",
     "allowPosts": true,
     "zanod": true,
+    "projectId": "",
+    "projectSecret": "",
     "ports": [
         "http://127.0.0.1:10000"
     ],
     "walletPort": "http://127.0.0.1:11211",
+    "address": "",
     "filters": {
         "category": "",
         "locationCountry": "",

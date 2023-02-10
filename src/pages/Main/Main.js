@@ -73,12 +73,17 @@ function Main() {
 
         const result = !state.config?.zanod ?  (await getOwnerOffers(config)) : (await getOffersFromRPC(config));
 
+        function getImagesArray(offer) {
+            const imagesArray = decodeURI(offer.url).replace(/\[|\]/g, '').split(',').filter(e => e);
+            return imagesArray.some(offer => offer.includes('http')) ? [decodeURI(offer.url)] : imagesArray;
+        }
+
         const cardsList = result.offers.map(e => ({
             title: decodeURI(e.t),
             description: decodeURI(e.do),
             price: decodeURI(e.ap), 
             category: decodeURI(e.cat),
-            image: decodeURI(e.url),
+            images: JSON.stringify(getImagesArray(e)),
             contact: decodeURI(e.cnt),
             comment: decodeURI(e.com),
             tx: e.tx_hash

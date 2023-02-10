@@ -4,9 +4,9 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import defaultConfig from "../defaultConfig.json" assert { type: "json" };
 import fetch from "node-fetch";
+import { create  } from "ipfs-http-client";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
 class DataController {
     async changeConfig(req, res) {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
@@ -55,6 +55,38 @@ class DataController {
             } catch {}
             res.send({ success: false, data: "Changing config error" });
             console.error(err);
+        }
+    }
+
+    async uploadIPFS(req, res) {
+        let ipfs;
+        const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
+        try {
+            const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
+            await db.close();   
+            const projectId = config.projectId;
+            const projectSecret = config.projectSecret;
+            const authorization = "Basic " + Buffer.from(projectId + ":" + projectSecret).toString('base64');
+            ipfs = create({
+                url: "https://ipfs.infura.io:5001/api/v0",
+                headers:{
+                    authorization
+                }
+            });
+            const result = await ipfs.add(req.file.buffer);
+
+            ipfs.stop().catch(() => {});
+            ipfs = undefined;
+            res.send({ success: true, hash: result.path })
+
+        } catch (error) {
+            try {
+                await ipfs.stop();
+            } catch (error) {}
+            try {
+                await db.close();
+            } catch {}
+            res.send({ success: false });
         }
     }
 

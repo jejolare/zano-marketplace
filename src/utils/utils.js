@@ -120,7 +120,7 @@ export function redefineStyle(property, value) {
     document.documentElement.style.setProperty("--" + property, value);
 }
 
-export async function resetStyles () {
+export async function resetStyles() {
     await fetch('/api/data/reset-styles', {
         method: "POST",
         headers: {
@@ -128,4 +128,13 @@ export async function resetStyles () {
         }
     })
     .then(res => res.json());
+}
+
+export async function uploadIPFS(data) {
+    const result = await fetch('/api/data/ipfs', {
+        method: "POST",
+        body: data
+    })
+    .then(res => res.json());
+    return result?.hash;
 }

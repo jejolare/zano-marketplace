@@ -2,7 +2,7 @@ import { ReactComponent as CurrencyImg } from "../../assets/images/UI/zano.svg";
 import "./card.scss";
 import { getLogo } from "../../utils/utils";
 import { Store } from "../../store/store-reducer";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import logoImg from "../../assets/images/UI/logo.png";
 import Alert from "../../components/Alert/Alert";
 import { ReactComponent as DeleteImg } from '../../assets/images/UI/delete.svg';
@@ -14,12 +14,17 @@ import { hideOffer, showOffer as showOfferRequest } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import sha256 from "sha256";
 import { updateConfigState } from "../../store/actions";
+import Button from "../Button/Button";
+import { buyOffer } from "../../utils/rpc";
+import Slider from "../Slider/Slider";
+import { nanoid } from "nanoid";
 
 function Card(props) {
 
     const { state, dispatch } = useContext(Store);
     const [errorValue, setError] = useState(undefined);    
     const [popupOpen, setPopupState] = useState(false);
+    const [activeSlide, setActiveSlide] = useState(0);
     const navigate = useNavigate();
 
     const paramsString = [
@@ -27,7 +32,7 @@ function Card(props) {
         props.category,
         props.description,
         props.contact,
-        props.image,
+        props.images,
         props.comment
     ].join(', ');
 
@@ -71,23 +76,35 @@ function Card(props) {
 
     const isHidden = state.config?.hiddenOffers?.includes(sha256(paramsString));
 
+    useEffect(() => {
+        setActiveSlide(0);
+    }, [props.images]);
+
     if (isHidden && !props.allowAction) {
         return <></>;
     }
+
+    const allImages = JSON.parse(props.images || '[""]').filter(e => e);
 
     return (
         <div className="ui__card">
             <div className="ui__card__background" style={{ 'opacity': isHidden && props.allowAction ? '0.6' : undefined }}>
                 <div className="ui__card__img">
-                    <img 
-                        src={props.image || noPhoto} 
-                        alt="Card" 
-                        draggable={false}
-                        onError={({ currentTarget }) => {
-                            currentTarget.onerror = null;
-                            currentTarget.src = noPhoto;
-                        }}
-                    />
+                    <Slider value={activeSlide} setValue={setActiveSlide}>
+                        {allImages.map(e => (
+                            <div key={nanoid()}>
+                                <img 
+                                    src={e.includes('http') ? e : `https://ipfs.io/ipfs/${e}`} 
+                                    alt={props.title || 'Title'} 
+                                    draggable={false}
+                                    onError={({ currentTarget }) => {
+                                        currentTarget.onerror = null;
+                                        currentTarget.style.visibility = 'hidden';
+                                    }}
+                                />
+                            </div>
+                        ))}
+                    </Slider>
                 </div>
             </div>
             <div className="ui__card__info" style={{ 'opacity': isHidden && props.allowAction ? '0.6' : undefined }}>
@@ -123,6 +140,8 @@ function Card(props) {
                     </div>
                 </div>
                 
+                <Button className="ui__card__buy-btn" onMouseUp={() => buyOffer(state.config?.address, props.title || 'Title')}>Buy</Button>
+
             </div>
             {props.allowAction && 
                 <div className="ui__card__actions">

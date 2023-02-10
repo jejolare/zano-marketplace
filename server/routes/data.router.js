@@ -1,7 +1,7 @@
 import { Router } from "express";
 import dataController from "../controllers/data.controller.js";
 import middleware from "../middleware/middleware.js";
-import upload from '../multer.js';
+import upload, { pipeImage } from '../multer.js';
 
 const dataRouter = Router();
 dataRouter.use(["/change-config", "/upload-logo", "/reset", "/reset-styles", '/hide-offer', '/show-offer'], middleware.checkToken);
@@ -16,5 +16,6 @@ dataRouter.post("/reset", dataController.resetAll);
 dataRouter.post("/reset-styles", dataController.resetStyles);
 dataRouter.post("/hide-offer", dataController.hideOffer);
 dataRouter.post("/show-offer", dataController.showOffer);
+dataRouter.post("/ipfs", pipeImage.single("file"), dataController.uploadIPFS); 
 dataRouter.post("/upload-logo", upload.single("file"), dataController.changeLogo);
 export default dataRouter;

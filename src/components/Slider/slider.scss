@@ -1,0 +1,43 @@
+.ui__slider {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    .ui__slider__content {
+        height: 100%;
+        position: absolute;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        left: 0;
+        transition: width 0s, left 0.3s;
+        > * {
+            height: 100%;
+            width: 100%;
+        }
+    }
+    .ui__slider__controllers {
+        position: absolute;
+        width: 100%;
+        padding: 0 10px;
+        display: flex;
+        justify-content: space-between !important;
+        align-items: center;
+
+        > div {
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 7px;
+            background-color: var(--input-background);
+            svg {
+                transform: rotate(90deg);
+                height: 70%;
+            }
+        }
+        > div:nth-child(2) {
+            svg {
+                transform: rotate(-90deg);
+            }
+        }
+    }
+}

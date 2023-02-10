@@ -9,5 +9,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer( { storage: storage } );
+const pipeImage = multer();
 
-export default upload
+export { pipeImage };
+export default upload;

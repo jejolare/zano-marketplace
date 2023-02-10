@@ -22,6 +22,10 @@ function General(props) {
     const [ports, setPorts] = useState(config?.ports?.join(', ') || '');
     const [nodeLink, setNodeLink] = useState(config?.walletPort || '');
     const [logo, setLogo] = useState();
+    const [transferAddress, setTransferAddress] = useState(config?.address || '');
+    const [infuraID, setInfuraID] = useState(config?.projectId || '');
+    const [infuraSecret, setInfuraSecret] = useState(config?.projectSecret || '');
+
 
     async function changeConfig() {
         await updateConfig({
@@ -31,7 +35,10 @@ function General(props) {
             allowPosts,
             noSearch,
             zanod: useZanod,
+            address: transferAddress,
             ports: ports.split(', '),
+            projectId: infuraID,
+            projectSecret: infuraSecret,
             walletPort: nodeLink
         });
 
@@ -69,6 +76,12 @@ function General(props) {
                 <ImageUploader value={logo} setValue={setLogo}/>
                 <p>Change password</p>
                 <Input placeholder="Type new password" value={password} setValue={setPassword} type="password"/>
+                <p>Infura project ID</p>
+                <Input placeholder="Type your project ID" value={infuraID} setValue={setInfuraID} />
+                <p>Infura secret</p>
+                <Input placeholder="Type your Infura secret" value={infuraSecret} setValue={setInfuraSecret} type="password"/>
+                <p>Transfer address for offers</p>
+                <Input placeholder="Type transfer address" value={transferAddress} setValue={setTransferAddress}/>
                 <div className="ui__form__switch">
                     <Switch value={useZanod} setValue={setZanodState}/>
                     <p>Use Zano daemon</p> 
