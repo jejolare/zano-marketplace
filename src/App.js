@@ -69,6 +69,7 @@ function App() {
             {state.isPrepared &&
               <>
                 <Route exact path="/" element={<MainPage/>}/>
+                {state.isAdmin && <Route exact path="/editor" element={<MainPage/>}/>}
                 <Route exact path="/offer/add" element={<NewOfferPage/>}/>
                 <Route exact path="/admin" element={<AdminPage/>}/>
                 <Route exact path="/admin/:type" element={<AdminPage/>}/>

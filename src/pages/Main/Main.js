@@ -2,7 +2,7 @@ import "./main.scss";
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import Button from "../../components/Button/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Store } from "../../store/store-reducer";
 import { useContext, useState, useEffect } from "react";
 import { getOffersFromRPC } from "../../utils/rpc.js";
@@ -12,6 +12,7 @@ import sha256 from "sha256";
 import { getOwnerOffers } from "../../utils/utils";
 
 function Main() {
+    const location = useLocation();
     const navigate = useNavigate();
     const { state } = useContext(Store);
     const [loadedCards, setLoadedCards] = useState([]);
@@ -25,8 +26,8 @@ function Main() {
             return (
                 <div className="header-offers">
                     <div 
-                        className={"ui__button " + (profilePage || allowActions ? 'profile-page_selected' : '')} 
-                        onMouseUp={() => state.isAdmin ? setAllowActions(!allowActions) : setProfilePageState(!profilePage)}
+                        className={"ui__button " + (profilePage ? 'profile-page_selected' : '')} 
+                        onMouseUp={() => setProfilePageState(!profilePage)}
                     >
                         <ProfileImg/>
                     </div>
@@ -37,6 +38,14 @@ function Main() {
         return <></>;
     }
 
+    useEffect(() => {
+        if (location.pathname === '/editor') {
+            setAllowActions(true);
+        } else {
+            setAllowActions(false);
+        }
+    }, [location]);
+    
     async function loadOffers(params) {
 
         const { offset, search, profile } = params;

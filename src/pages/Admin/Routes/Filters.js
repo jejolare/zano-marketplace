@@ -121,6 +121,7 @@ function Filters(props) {
                     <Switch value={reverse} setValue={setReverse}/>
                     <p>Reverse sort</p>
                 </div>
+                <Button className="ui__submit-btn" onMouseUp={() => window.open('/editor','_blank')}>Offers visibility editor</Button>
                 <Button className="ui__submit-btn" onMouseUp={saveFilters}>Save</Button>
             </Form>
         </div>

@@ -18,6 +18,7 @@ import Button from "../Button/Button";
 import { buyOffer } from "../../utils/rpc";
 import Slider from "../Slider/Slider";
 import { nanoid } from "nanoid";
+// import Preloader from "../Preloader/Preloader"
 
 function Card(props) {
 
@@ -77,7 +78,6 @@ function Card(props) {
 
 
     const isHidden = state.config?.hiddenOffers?.includes(sha256(paramsString));
-
     useEffect(() => {
         setActiveSlide(0);
     }, [props.images]);
