@@ -118,6 +118,18 @@
             "property": "ui-danger-hover",
             "value": "#ff5454",
             "type": "color"
+        },
+        {
+            "name": "No photo gradient (from)",
+            "property": "ui-gradient-color-from",
+            "value": "#464646",
+            "type": "color"
+        },
+        {
+            "name": "No photo gradient (to)",
+            "property": "ui-gradient-color-to",
+            "value": "#2c2c2c",
+            "type": "color"
         }
     ]
 }

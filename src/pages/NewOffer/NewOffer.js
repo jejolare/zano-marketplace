@@ -16,6 +16,7 @@ import { nanoid } from "nanoid";
 import { ReactComponent as DeleteImg } from '../../assets/images/UI/delete.svg';
 import { ReactComponent as ArrowImg } from '../../assets/images/UI/arrow.svg';
 import { Store } from "../../store/store-reducer";
+import Preloader from "../../components/Preloader/Preloader";
 
 function NewOffer() {
 
@@ -29,6 +30,7 @@ function NewOffer() {
     const [contact, setContact] = useState('');
     const [images, setImages] = useState([]);
     const [comment, setComment] = useState('');
+    const [isLoading, setLoadingState] = useState(false);
 
     const paramsData = {
         title,
@@ -62,10 +64,12 @@ function NewOffer() {
     // const uploaderRef = useRef(null);
 
     async function uploadImage(value) {
+        setLoadingState(true);
         const formData = new FormData();
         formData.append("file", value);
         const hash = await uploadIPFS(formData);
         setImages([...images, hash]);
+        setLoadingState(false);
     }
 
     function UploadedImage(props) {
@@ -93,11 +97,26 @@ function NewOffer() {
             setImages(swapElements(images, index, index+1));
         }
 
+        const [imageLoaded, setImageLoaded] = useState(false); 
+
         return (
             <div className="offer-page__image">
                 <div className="offer-page__image__wrapper">
                     <div>
-                        <img src={`https://ipfs.io/ipfs/${image}`} alt="" />
+                        <img 
+                            src={`https://ipfs.io/ipfs/${image}`} 
+                            alt="" 
+                            style={{ 'display': imageLoaded ? 'block' : 'none' }}
+                            onLoad={() => {
+                                setImageLoaded(true)
+                            }}
+                            onError={() => {
+                                console.log('ee');
+                            }}
+                        />
+                        {!imageLoaded &&
+                            <Preloader/>
+                        }
                     </div>
                     <h4>#{index + 1}</h4>
                 </div>
@@ -130,15 +149,17 @@ function NewOffer() {
             <Header Button={<Button onMouseUp={() => navigate("/")}>Go Back</Button>}/>
             <OfferForm params={paramsData}>
                 <h3>Create New Offer</h3>
-                
-                {/* <input type="file" name="file" ref={uploaderRef}/>
-                <button onClick={uploadImage}>Upload file</button> */}
                 <p>Images</p>
                 <div
                     style={{ 'position': 'relative' }}
                 >
                     {!state.config?.projectId &&
                         <p className="offer-page__no-address">You cannot upload images because the marketplace owner has not enabled this option</p>
+                    }
+                    {isLoading &&
+                        <div className="offer-page__images__preloader">
+                            <Preloader/>
+                        </div>
                     }
                     <div className={state.config?.projectId ? '' : 'disabled disabled_full'}>
                         <ImageUploader setValue={uploadImage}/>

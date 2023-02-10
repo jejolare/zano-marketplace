@@ -24,6 +24,9 @@ function Card(props) {
     const { state, dispatch } = useContext(Store);
     const [errorValue, setError] = useState(undefined);    
     const [popupOpen, setPopupState] = useState(false);
+    const [imageLoadingFailed, setImageError] = useState(false);
+    const [imagePreloader, setImagePreloader] = useState(true);
+
     const [activeSlide, setActiveSlide] = useState(0);
     const navigate = useNavigate();
 
@@ -36,7 +39,6 @@ function Card(props) {
         props.comment
     ].join(', ');
 
-    const noPhoto = state.config.customLogo ? getLogo() : logoImg;
     const contact = props.contact || '@your_contacts';
     const comment = props.comment || "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, minus tenetur recusandae accusamus commodi numquam tempora ea ratione, nesciunt facilis fuga aperiam dolorum? Iste quia qui laboriosam deleniti dolorem impedit. ";
 
@@ -80,26 +82,43 @@ function Card(props) {
         setActiveSlide(0);
     }, [props.images]);
 
+    const allImages = JSON.parse(props.images || '[""]').filter(e => e);
+
+    useEffect(() => {
+        if (!allImages[0] && !imageLoadingFailed) {
+            setImageError(true);
+        }
+    }, [allImages]);
+
     if (isHidden && !props.allowAction) {
         return <></>;
     }
 
-    const allImages = JSON.parse(props.images || '[""]').filter(e => e);
-
     return (
         <div className="ui__card">
-            <div className="ui__card__background" style={{ 'opacity': isHidden && props.allowAction ? '0.6' : undefined }}>
+            <div 
+                className="ui__card__background" 
+                style={{ 
+                    'opacity': isHidden && props.allowAction ? '0.6' : undefined,
+                    'background': imageLoadingFailed || imagePreloader ? `radial-gradient(var(--ui-gradient-color-from), var(--ui-gradient-color-to))` : undefined 
+                }}
+            >
                 <div className="ui__card__img">
+                    {imageLoadingFailed && <h5 className="ui__card__img__error">No photo</h5>}
                     <Slider value={activeSlide} setValue={setActiveSlide}>
                         {allImages.map(e => (
                             <div key={nanoid()}>
                                 <img 
                                     src={e.includes('http') ? e : `https://ipfs.io/ipfs/${e}`} 
-                                    alt={props.title || 'Title'} 
                                     draggable={false}
                                     onError={({ currentTarget }) => {
+                                        currentTarget.style.display = 'none';
                                         currentTarget.onerror = null;
-                                        currentTarget.style.visibility = 'hidden';
+                                        setImageError(true);
+                                    }}
+                                    onLoad={() => {
+                                        setImagePreloader(false);
+                                        setImageError(false);
                                     }}
                                 />
                             </div>

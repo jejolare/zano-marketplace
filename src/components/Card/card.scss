@@ -173,6 +173,13 @@
         width: 100%;
         margin-top: 15px;
     }
+    .ui__card__img__error {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
 }
 
 .ui__card__comment__content {
