@@ -1,18 +1,19 @@
 import './slider.scss';
 import { useRef, useState, useEffect } from 'react';
 import { ReactComponent as ArrowImg } from '../../assets/images/UI/arrow.svg';
+import { useWindowWidth } from '@react-hook/window-size';
 
 function Slider(props) {
     
     const [slideWidth, setSlideWidth] = useState(0);
-
+    const currentWidth = useWindowWidth();
     const sliderRef = useRef(null);
 
     useEffect(() => {
         if (sliderRef?.current) {
             setSlideWidth(parseFloat(window.getComputedStyle(sliderRef.current).width));   
         }
-    }, [sliderRef]);
+    }, [sliderRef, currentWidth]);
 
     function scroll(right = true) {
         if (right) {

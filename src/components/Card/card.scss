@@ -190,4 +190,7 @@
         line-height: 150%;
         max-height: 240px;
     }
+    @media screen and (max-width: 540px) {
+        width: 310px;
+    }
 }
