@@ -76,10 +76,18 @@ function General(props) {
                 <ImageUploader value={logo} setValue={setLogo}/>
                 <p>Change password</p>
                 <Input placeholder="Type new password" value={password} setValue={setPassword} type="password"/>
+                <div className="ui__form__header admin__subheader">
+                    <h3>IPFS settings</h3>
+                    <p>Set ipfs settings to allow users to upload images</p>
+                </div>
                 <p>Infura project ID</p>
                 <Input placeholder="Type your project ID" value={infuraID} setValue={setInfuraID} />
                 <p>Infura secret</p>
                 <Input placeholder="Type your Infura secret" value={infuraSecret} setValue={setInfuraSecret} type="password"/>
+                <div className="ui__form__header admin__subheader">
+                    <h3>Zano wallet</h3>
+                    <p>Set Zano settings to display offers in your marketplace</p>
+                </div>
                 <p>Transfer address for offers</p>
                 <Input placeholder="Type transfer address" value={transferAddress} setValue={setTransferAddress}/>
                 <div className="ui__form__switch">

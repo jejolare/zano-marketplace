@@ -86,7 +86,6 @@ function Main() {
             const imagesArray = decodeURI(offer.url).replace(/\[|\]/g, '').split(',').filter(e => e);
             return imagesArray.some(offer => offer.includes('http')) ? [decodeURI(offer.url)] : imagesArray;
         }
-
         const cardsList = result.offers.map(e => ({
             title: decodeURI(e.t),
             description: decodeURI(e.do),
