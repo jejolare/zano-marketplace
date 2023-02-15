@@ -109,7 +109,7 @@ function Card(props) {
                         {allImages.map(e => (
                             <div key={nanoid()}>
                                 <img 
-                                    src={e.includes('http') ? e : `https://ipfs.io/ipfs/${e}`} 
+                                    src={e.includes('http') ? e : `${state.config.selectedIPFS}${e}`} 
                                     draggable={false}
                                     onError={({ currentTarget }) => {
                                         currentTarget.style.display = 'none';

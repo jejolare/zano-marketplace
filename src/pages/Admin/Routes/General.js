@@ -25,7 +25,16 @@ function General(props) {
     const [transferAddress, setTransferAddress] = useState(config?.address || '');
     const [infuraID, setInfuraID] = useState(config?.projectId || '');
     const [infuraSecret, setInfuraSecret] = useState(config?.projectSecret || '');
+    const [ipfsEndpoint, setEndpoint] = useState(() => {
+        if (!config?.selectedIPFS) return '';
 
+        if (config?.defaultIPFS.includes(config?.selectedIPFS)) {
+            return config?.selectedIPFS;
+        }
+
+        return 'Use my own';
+    });
+    const [ownIpfsEndpoint, setOwnEndpoint] = useState(config?.defaultIPFS.includes(config?.selectedIPFS) ? '' : config?.selectedIPFS);
 
     async function changeConfig() {
         await updateConfig({
@@ -39,7 +48,8 @@ function General(props) {
             ports: ports.split(', '),
             projectId: infuraID,
             projectSecret: infuraSecret,
-            walletPort: nodeLink
+            walletPort: nodeLink,
+            selectedIPFS: ipfsEndpoint === "Use my own" ? ownIpfsEndpoint : ipfsEndpoint
         });
 
         if (logo) {
@@ -60,6 +70,8 @@ function General(props) {
             navigate(0);
         }
     }
+
+    console.log(ipfsEndpoint);
 
     return (
         <div className="admin-page__settings">
@@ -84,6 +96,19 @@ function General(props) {
                 <Input placeholder="Type your project ID" value={infuraID} setValue={setInfuraID} />
                 <p>Infura secret</p>
                 <Input placeholder="Type your Infura secret" value={infuraSecret} setValue={setInfuraSecret} type="password"/>
+                <p>IPFS endpoint</p>
+                <Input 
+                    options={config?.defaultIPFS || []} 
+                    value={ipfsEndpoint} 
+                    setValue={setEndpoint}
+                    noInput={true}
+                />
+                {ipfsEndpoint === "Use my own" &&
+                    <>
+                        <p>Your IPFS endpoint</p>
+                        <Input placeholder="https://ipfs.io/ipfs/" value={ownIpfsEndpoint} setValue={setOwnEndpoint}/>
+                    </>
+                }
                 <div className="ui__form__header admin__subheader">
                     <h3>Zano wallet</h3>
                     <p>Set Zano settings to display offers in your marketplace</p>

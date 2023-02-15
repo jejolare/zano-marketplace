@@ -55,6 +55,7 @@ function Input(props) {
                 type={props.type || "text"}
                 placeholder={props.placeholder} 
                 onInput={e => props.noInput ? '' : props.setValue(e.target.value)}
+                readOnly={props.noInput}
                 value={props.value}
                 onClick={handlerInputClick}
                 {...props.attributes}
