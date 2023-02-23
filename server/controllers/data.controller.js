@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import defaultConfig from "../defaultConfig.json" assert { type: "json" };
 import fetch from "node-fetch";
 import { create  } from "ipfs-http-client";
+import sha256 from "sha256";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 class DataController {
@@ -149,9 +150,14 @@ class DataController {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
             const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
+            const user = await db.get("SELECT * FROM user WHERE token=?", [sha256(req.cookies.token || '')]);
             const hiddenOffers = (await db.all("SELECT hash FROM hiddenOffers") || []).map(e => e.hash);
 
             config.hiddenOffers = hiddenOffers;
+
+            if (!user) {
+                delete config.projectSecret;
+            }
 
             await db.close();
             if (!config.styles) {
