@@ -3,9 +3,11 @@ import Button from "../../../components/Button/Button";
 import Input from "../../../components/Input/Input";
 import ImageUploader from "../../../components/ImageUploader/ImageUploader";
 import Switch from "../../../components/Switch/Switch";
-import { useState } from "react";
-import { updateConfig, uploadLogo, updatePassword, resetAll } from "../../../utils/utils";
+import { useRef, useState } from "react";
+import { updateConfig, uploadLogo, updatePassword, resetAll, exportConfig } from "../../../utils/utils";
 import { useNavigate } from "react-router-dom";
+import { ReactComponent as DownloadImg } from "../../../assets/images/UI/download.svg";
+import { ReactComponent as UploadImg } from "../../../assets/images/UI/upload.svg";
 
 function General(props) {
 
@@ -34,7 +36,7 @@ function General(props) {
 
         return 'Use my own';
     });
-    const [ownIpfsEndpoint, setOwnEndpoint] = useState(config?.defaultIPFS.includes(config?.selectedIPFS) ? '' : config?.selectedIPFS);
+    const [ownIpfsEndpoint, setOwnEndpoint] = useState(config?.defaultIPFS?.includes(config?.selectedIPFS) ? '' : config?.selectedIPFS);
 
     async function changeConfig() {
         await updateConfig({
@@ -71,7 +73,22 @@ function General(props) {
         }
     }
 
-    console.log(ipfsEndpoint);
+    const importRef = useRef(null);
+
+    async function importConfig(e) {
+        const file = e.target.files[0];
+        if (file.type !== 'application/json') return;
+
+        const reader = new FileReader();
+        reader.onload = async () => {
+            const config = JSON.parse(reader.result);
+            if (config.defaultIPFS && config.defaultIPFS[0]) {
+                await updateConfig(config);
+                navigate(0);
+            }
+        };
+        reader.readAsText(file);
+    }
 
     return (
         <div className="admin-page__settings">
@@ -88,6 +105,15 @@ function General(props) {
                 <ImageUploader value={logo} setValue={setLogo}/>
                 <p>Change password</p>
                 <Input placeholder="Type new password" value={password} setValue={setPassword} type="password"/>
+                <Button className="ui__submit-btn ui__submit-btn__image" onMouseUp={exportConfig}> 
+                    <DownloadImg/>
+                    Export config
+                </Button>
+                <Button className="ui__submit-btn ui__submit-btn__image ui__danger-btn" onMouseUp={() => importRef.current?.click()}>
+                    <UploadImg/>
+                    Import config
+                </Button>
+                <input style={{ 'display': 'none' }} type="file" ref={importRef} onChange={importConfig}/>
                 <div className="ui__form__header admin__subheader">
                     <h3>IPFS settings</h3>
                     <p>Set ipfs settings to allow users to upload images</p>

@@ -59,6 +59,24 @@ export async function updateConfig(values, updateOnly) {
     return result;
 }
 
+export async function exportConfig() {
+    await fetch('/api/data/export', {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    .then(response => response.text())
+    .then(data => {
+      const blob = new Blob([data], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'zanoConfig.json';
+      link.click();
+    });
+}
+
 export async function uploadLogo(logo) {
 
     const data = new FormData();

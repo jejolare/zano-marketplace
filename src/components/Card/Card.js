@@ -96,74 +96,91 @@ function Card(props) {
 
     return (
         <div className="ui__card">
-            <div 
-                className="ui__card__background" 
-                style={{ 
-                    'opacity': isHidden && props.allowAction ? '0.6' : undefined,
-                    'background': imageLoadingFailed || imagePreloader ? `radial-gradient(var(--ui-gradient-color-from), var(--ui-gradient-color-to))` : undefined 
-                }}
-            >
-                <div className="ui__card__img">
-                    {imageLoadingFailed && <h5 className="ui__card__img__error">No photo</h5>}
-                    <Slider value={activeSlide} setValue={setActiveSlide}>
-                        {allImages.map(e => (
-                            <div key={nanoid()}>
-                                <img 
-                                    src={e.includes('http') ? e : `${state.config.selectedIPFS}${e}`} 
-                                    draggable={false}
-                                    onError={({ currentTarget }) => {
-                                        currentTarget.style.display = 'none';
-                                        currentTarget.onerror = null;
-                                        setImageError(true);
-                                    }}
-                                    onLoad={() => {
-                                        setImagePreloader(false);
-                                        setImageError(false);
-                                    }}
-                                />
-                            </div>
-                        ))}
-                    </Slider>
+            {state.config?.offerConfig?.image &&
+                <div 
+                    className="ui__card__background" 
+                    style={{ 
+                        'opacity': isHidden && props.allowAction ? '0.6' : undefined,
+                        'background': imageLoadingFailed || imagePreloader ? `radial-gradient(var(--ui-gradient-color-from), var(--ui-gradient-color-to))` : undefined 
+                    }}
+                >
+                    <div className="ui__card__img">
+                        {imageLoadingFailed && <h5 className="ui__card__img__error">No photo</h5>}
+                        <Slider value={activeSlide} setValue={setActiveSlide}>
+                            {allImages.map(e => (
+                                <div key={nanoid()}>
+                                    <img 
+                                        src={e.includes('http') ? e : `${state.config.selectedIPFS}${e}`} 
+                                        draggable={false}
+                                        onError={({ currentTarget }) => {
+                                            currentTarget.style.display = 'none';
+                                            currentTarget.onerror = null;
+                                            setImageError(true);
+                                        }}
+                                        onLoad={() => {
+                                            setImagePreloader(false);
+                                            setImageError(false);
+                                        }}
+                                    />
+                                </div>
+                            ))}
+                        </Slider>
+                    </div>
                 </div>
-            </div>
+            }
             <div className="ui__card__info" style={{ 'opacity': isHidden && props.allowAction ? '0.6' : undefined }}>
 
                 <div className="ui__card__main-info">
                     <div>
+                    {state.config?.offerConfig?.title &&
                         <h5>{props.title || 'Title'}</h5>
+                    }
+                    {state.config?.offerConfig?.category &&
                         <p className="ui__card__main-info__category">{props.category || 'Category'}</p>
+                    }
+                        
                     </div>
-                    <div className="ui__card__exp-data">
-                        <h6>Expires in</h6>
-                        <p>28 days</p>
-                    </div>
+                    {state.config?.offerConfig?.expires &&
+                        <div className="ui__card__exp-data">
+                            <h6>Expires in</h6>
+                            <p>28 days</p>
+                        </div>
+                    }
                 </div>
 
                 <div className="ui__card__main-info ui__card__details">
                     <div>
-                        <p className="ui__card__main-info__description">{props.description || 'description'}</p>
-                        <div className="ui__card__price">
-                            <CurrencyImg />
-                            <p 
-                                style={{ 
-                                    'width': `${(props.price?.length || 2) > 5 ? 50 : (props.price?.length || 2)*10}px` 
-                                }}
-                            >
-                                {props.price || 10}
-                            </p>
-                            <p className="ui__card__currency">ZANO</p>
+                        {state.config?.offerConfig?.desc &&
+                            <p className="ui__card__main-info__description">{props.description || 'description'}</p>
+                        }
+                        {state.config?.offerConfig?.price &&
+                            <div className="ui__card__price">
+                                <CurrencyImg />
+                                <p 
+                                    style={{ 
+                                        'width': `${(props.price?.length || 2) > 5 ? 50 : (props.price?.length || 2)*10}px` 
+                                    }}
+                                >
+                                    {props.price || 10}
+                                </p>
+                                <p className="ui__card__currency">ZANO</p>
+                            </div>
+                        }
+                    </div>
+                    {state.config?.offerConfig?.contacts &&
+                        <div className="ui__card__author">
+                            <a href="/" onClick={copy}>{contact}</a>
                         </div>
-                    </div>
-                    <div className="ui__card__author">
-                        <a href="/" onClick={copy}>{contact}</a>
-                    </div>
+                    }
                 </div>
-                <Button 
-                    className={"ui__card__buy-btn " + (state.config?.address ?  '' : 'disabled')} 
-                    onMouseUp={() => buyOffer(state.config?.address, props.title || 'Title')} 
-                >
-                    Buy
-                </Button>
+                {state.config?.offerConfig?.buy &&
+                    <Button 
+                        className={"ui__card__buy-btn " + (state.config?.address ?  '' : 'disabled')} 
+                        onMouseUp={() => buyOffer(state.config?.address, props.title || 'Title')} 
+                    >
+                        Buy
+                    </Button>
+                }
 
             </div>
             {props.allowAction && 
@@ -180,7 +197,7 @@ function Card(props) {
                     }
                 </div>
             }
-            {comment && 
+            {comment && state.config?.offerConfig?.tooltip && state.config?.offerConfig?.image && 
                 <div className="ui__card__comment">
                     <div className="ui__card__comment__btn" onClick={() => setPopupState(true)}>
                         <TooltipImg/>

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useContext } from "react";
+import React, { Suspense, useEffect, useContext, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import './App.scss';
 import { isTemplatePrepared, checkAuth, redefineStyle } from "./utils/utils";
@@ -15,6 +15,7 @@ const SetupPage = React.lazy(() => import('./pages/Setup/Setup'));
 function App() {
 
   const { state, dispatch } = useContext(Store);
+
   useEffect(() => {
     async function checkAppStatus() {
       const isPrepared = await isTemplatePrepared();
@@ -40,7 +41,7 @@ function App() {
         .then(res => res.json())
         .then(json => JSON.parse(json.data || '{}'));
         
-        updateConfigState(dispatch, configJson);
+        updateConfigState(dispatch, {...configJson,  _DEFAULT: configJson });
         for (const iterator of (configJson.styles || [])) {
           redefineStyle(iterator.property, iterator.value);
         }
@@ -53,6 +54,16 @@ function App() {
     const location = useLocation();
 
     useEffect(() => {
+
+
+      // We can compare objects here as they should be identical if the user is not on styles page.
+      if (
+        (JSON.stringify(state.config?.offerConfig) !== JSON.stringify(state.config?._DEFAULT?.offerConfig)) &&
+        location.pathname !== '/admin/styles' 
+      ) {
+        updateConfigState(dispatch, {...state.config, offerConfig: state.config?._DEFAULT?.offerConfig });
+      }
+
       for (const iterator of (state.config?.styles || [])) {
         redefineStyle(iterator.property, iterator.value);
       }
@@ -60,6 +71,7 @@ function App() {
 
     return (<></>);
   }
+
 
   return (
     <div className="App">

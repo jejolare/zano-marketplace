@@ -8,10 +8,12 @@ import Input from "../../../components/Input/Input";
 import Button from "../../../components/Button/Button";
 import { resetStyles, updateConfig } from "../../../utils/utils";
 import { useNavigate } from "react-router-dom";
+import Switch from "../../../components/Switch/Switch";
+import { updateConfigState } from "../../../store/actions";
 
 function Styles() {
     const navigate = useNavigate();
-    const { state } = useContext(Store);
+    const { state, dispatch } = useContext(Store);
 
     async function reset() {
         const sure = window.confirm('Reset all styles to default?');
@@ -29,6 +31,18 @@ function Styles() {
     }
 
     const [stylesData, setStylesData] = useState(initialData);
+    const [offerConfig, setOfferConfig] = useState(state?.config?.offerConfig || {});
+
+    function changeOfferConfig(field, value) {
+
+        const newData = {
+            ...offerConfig,
+            [field]: value
+        }
+
+        setOfferConfig(newData);
+        updateConfigState(dispatch, { ...state.config, offerConfig: newData  });
+    }
 
     async function save() {
 
@@ -37,7 +51,7 @@ function Styles() {
             return e;
         });
 
-        updateConfig({ ...state.config, styles: updatedStyles }, true)
+        updateConfig({ ...state.config, styles: updatedStyles, offerConfig: offerConfig }, true);
         navigate(0);
     }
 
@@ -51,6 +65,49 @@ function Styles() {
         <div className="admin-page__styles">
             <OfferForm>
                 <div className="ui__form__header">
+                    <h3>Offer card</h3>
+                    <p>Edit the appearance of the offer card</p>
+                </div>
+
+                <div className="ui__form__switch admin__switch">
+                    <Switch value={offerConfig.title} setValue={(value) => changeOfferConfig('title', value)}/>
+                    <p>Show title field</p> 
+                </div>
+                <div className="ui__form__switch admin__switch">
+                    <Switch value={offerConfig.category} setValue={(value) => changeOfferConfig('category', value)}/>
+                    <p>Show category field</p> 
+                </div>
+                <div className="ui__form__switch admin__switch">
+                    <Switch value={offerConfig.expires} setValue={(value) => changeOfferConfig('expires', value)}/>
+                    <p>Show "Expires in" field</p> 
+                </div>
+                <div className="ui__form__switch admin__switch">
+                    <Switch value={offerConfig.desc} setValue={(value) => changeOfferConfig('desc', value)}/>
+                    <p>Show description field</p> 
+                </div>
+                <div className="ui__form__switch admin__switch">
+                    <Switch value={offerConfig.price} setValue={(value) => changeOfferConfig('price', value)}/>
+                    <p>Show price field</p> 
+                </div>
+                <div className="ui__form__switch admin__switch">
+                    <Switch value={offerConfig.contacts} setValue={(value) => changeOfferConfig('contacts', value)}/>
+                    <p>Show contacts field</p> 
+                </div>
+                <div className="ui__form__switch admin__switch">
+                    <Switch value={offerConfig.buy} setValue={(value) => changeOfferConfig('buy', value)}/>
+                    <p>Show "buy" button</p> 
+                </div>
+                <div className="ui__form__switch admin__switch">
+                    <Switch value={offerConfig.tooltip} setValue={(value) => changeOfferConfig('tooltip', value)}/>
+                    <p>Show offer tooltip</p> 
+                </div>
+                <div className="ui__form__switch admin__switch">
+                    <Switch value={offerConfig.image} setValue={(value) => changeOfferConfig('image', value)}/>
+                    <p>Show offer image</p> 
+                </div>
+
+
+                <div className="ui__form__header admin__subheader">
                     <h3>Styles</h3>
                     <p>Edit styles of your marketplace</p>
                 </div>
@@ -76,7 +133,7 @@ function Styles() {
                     </div>
                 )}
 
-                <Button className="ui__submit-btn ui__danger-btn" onMouseUp={reset}>Reset default styles</Button>
+                <Button className="ui__submit-btn ui__danger-btn" onMouseUp={reset}>Reset default appearance</Button>
                 <Button className="ui__submit-btn" onMouseUp={save}>Save</Button>
 
             </OfferForm>

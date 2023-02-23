@@ -48,6 +48,17 @@
         "maxPrice": 0,
         "reverse": true
     },
+    "offerConfig": {
+        "title": true,
+        "category": true,
+        "expires": true,
+        "desc": true,
+        "price": true,
+        "buy": true,
+        "tooltip": true,
+        "contacts": true,
+        "image": true
+    },
     "styles": [
         {
             "name": "Default Background",

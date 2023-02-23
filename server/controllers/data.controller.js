@@ -46,7 +46,12 @@ class DataController {
         try {
             const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
 
-            await db.run("UPDATE user SET config=?", [ JSON.stringify({ ...config, styles: defaultConfig.styles }) ]);
+            await db.run(
+                "UPDATE user SET config=?", 
+                [ 
+                    JSON.stringify({ ...config, styles: defaultConfig.styles, offerConfig: defaultConfig.offerConfig }) 
+                ]
+            );
             await db.close();
             res.send({ success: true });
         } catch(err) {
@@ -193,6 +198,27 @@ class DataController {
         }
     }
 
+    async export(req, res) {
+        const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
+        try {
+            const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
+            await db.close();
+            res.set({
+              'Content-Type': 'text/plain',
+              'Content-Disposition': `attachment; filename="zanoConfig.json"`,
+            });
+    
+            res.send(JSON.stringify(config));
+
+        } catch (error) {
+            try {
+                await db.close();
+            } catch {}
+            res.send({ success: false });
+            console.log(error);
+        }
+    }
+
     async getOffers(req, res) {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
         try {
@@ -237,6 +263,7 @@ class DataController {
                             "Content-type": "application/json"
                         }
                     }).then(r => r.json());
+
                     return offersData.result.offers || [];
                 } catch (error) {
                     return [];

@@ -26,6 +26,16 @@
         background-color: var(--button-background-hover);
     }
 }
+.ui__submit-btn__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+        height: 1em;
+        margin-right: 10px;
+        fill: white;
+    }
+}
 .ui__submit-btn {
     color: var(--button-text);
     width: 100%;

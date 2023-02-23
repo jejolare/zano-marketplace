@@ -17,7 +17,7 @@ function AdminMenu() {
                     to={'/admin/styles'}  
                     className={getClasses}
                 >
-                    STYLES
+                    APPEARANCE
                 </NavLink>
                 </li>
         </ul>
