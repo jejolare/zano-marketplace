@@ -42,7 +42,7 @@ export async function deleteOffer(tx) {
 
 export async function submitNewOffer(params) {
   const url = 'zano:action=marketplace_offer_create' +
-    `&mixins=10` +
+    `&mixins=0.01` +
     `&hide_sender=true` +
     `&hide_receiver=true'` +
     `&title='${params.title}'` +
