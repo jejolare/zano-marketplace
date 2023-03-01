@@ -8,6 +8,10 @@ import { create  } from "ipfs-http-client";
 import sha256 from "sha256";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+function prepareRPCLink(link) {
+    return link.slice(-1) === '/' ? link : link + '/';
+}
 class DataController {
     async changeConfig(req, res) {
         const db = await open({ filename: __dirname + '/../database.db', driver: sqlite3.Database });
@@ -185,8 +189,7 @@ class DataController {
         try {
             const config = JSON.parse((await db.get("SELECT config FROM user"))?.config || '{}');
             await db.close();
-
-            const offersData = await fetch(`${config.walletPort}/json_rpc`, {
+            const offersData = await fetch(`${prepareRPCLink(config.walletPort)}json_rpc`, {
                 method: "POST",
                 body: JSON.stringify(req.body),
                 headers: {
@@ -235,7 +238,7 @@ class DataController {
 
             async function getOffers(port, amount, offset) {
                 try {
-                    const offersData = await fetch(`${port.replace(/.$/,"/")}json_rpc`, {
+                    const offersData = await fetch(`${prepareRPCLink(port)}json_rpc`, {
                         method: "POST",
                         body: JSON.stringify({
                             jsonrpc: "2.0",

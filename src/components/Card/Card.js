@@ -158,12 +158,13 @@ function Card(props) {
                                 <CurrencyImg />
                                 <p 
                                     style={{ 
-                                        'width': `${(props.price?.length || 2) > 5 ? 50 : (props.price?.length || 2)*10}px` 
+                                        // 'width': `${(props.price?.length || 2) > 3 ? 45 : (props.price?.length || 2)*12}px` 
+                                        'width': '100px'
                                     }}
                                 >
                                     {props.price || 10}
                                 </p>
-                                <p className="ui__card__currency">ZANO</p>
+                                {/* <p className="ui__card__currency">ZANO</p> */}
                             </div>
                         }
                     </div>

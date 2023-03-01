@@ -70,6 +70,10 @@
         text-align: right;
     }
 
+    .ui__card__author {
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
     .ui__card__price p:nth-child(2) {
         width: 55px;
     }
