@@ -56,7 +56,7 @@ export async function submitNewOffer(params) {
   window.open(url,'_blank');
 }
 export async function buyOffer(address, title) {
-  const url = `zano:action=send&address=${address}&comment='Buying ${title}'&hide_sender=true&hide_receiver=true`
+  const url = `zano:action=send&address=${address}&comment='${title}'&hide_sender=true&hide_receiver=true`
 
   window.open(url,'_blank');
 }

@@ -2,7 +2,7 @@ import { ReactComponent as CurrencyImg } from "../../assets/images/UI/zano.svg";
 import "./card.scss";
 import { getLogo } from "../../utils/utils";
 import { Store } from "../../store/store-reducer";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import logoImg from "../../assets/images/UI/logo.png";
 import Alert from "../../components/Alert/Alert";
 import { ReactComponent as DeleteImg } from '../../assets/images/UI/delete.svg';
@@ -25,6 +25,7 @@ function Card(props) {
     const { state, dispatch } = useContext(Store);
     const [errorValue, setError] = useState(undefined);    
     const [popupOpen, setPopupState] = useState(false);
+    const [descPopupOpen, setDescPopupState] = useState(false);
     const [imageLoadingFailed, setImageError] = useState(false);
     const [imagePreloader, setImagePreloader] = useState(true);
 
@@ -55,12 +56,13 @@ function Card(props) {
     }
 
 
-    function PopupContent() {
+    function PopupContent(props) {
+        console.log(props);
         return (
             <div className="ui__card__comment__content">
-                <div className="popup__close" onMouseUp={() => setPopupState(false)}><CloseImg/></div>
+                <div className="popup__close" onMouseUp={() => props.close()}><CloseImg/></div>
                 <div className="ui__card__comment__data">
-                    {comment}
+                    {props.content || comment}
                 </div>
             </div>
         );
@@ -90,9 +92,22 @@ function Card(props) {
         }
     }, [allImages]);
 
+    const descRef = useRef(null);
+    const [descHeight, setDescHeight] = useState(0);
+    const [descWidth, setDescWidth] = useState(0);
+
+    useEffect(() => {
+        if (descRef.current) {
+            setDescHeight(parseFloat(window.getComputedStyle(descRef.current).height));   
+            setDescWidth(descRef.current.scrollWidth);
+        }
+    }, [descRef, props]);
+
     if (isHidden && !props.allowAction) {
         return <></>;
     }
+
+    const longDesc = descHeight > 58 || descWidth > 300;
 
     return (
         <div className="ui__card">
@@ -151,7 +166,23 @@ function Card(props) {
                 <div className="ui__card__main-info ui__card__details">
                     <div>
                         {state.config?.offerConfig?.desc &&
-                            <p className="ui__card__main-info__description">{props.description || 'description'}</p>
+                            <div className="ui__card__main-info__description">
+                                <p 
+                                    ref={descRef} 
+                                    onClick={() => longDesc ? setDescPopupState(true) : ''}
+                                    style={{ 'cursor': longDesc ? 'pointer' : undefined }}
+                                >
+                                    {props.description || 'description'}
+                                </p>
+                                {longDesc && descPopupOpen && 
+                                    <Popup
+                                        Content={PopupContent}
+                                        settings={{ content: props.description || 'description' }}
+                                        blur={true}
+                                        close={() => setDescPopupState(false)}
+                                    />
+                                }
+                            </div>
                         }
                         {state.config?.offerConfig?.price &&
                             <div className="ui__card__price">
@@ -159,7 +190,6 @@ function Card(props) {
                                 <p 
                                     style={{ 
                                         // 'width': `${(props.price?.length || 2) > 3 ? 45 : (props.price?.length || 2)*12}px` 
-                                        'width': '100px'
                                     }}
                                 >
                                     {props.price || 10}

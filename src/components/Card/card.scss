@@ -81,12 +81,32 @@
     .ui__card__main-info__description {
         width: 300px;
         position: absolute;
-        top: -5px;
+        top: -20px;
         transform: translate(0, -100%);
+        
+        // line-height: 2.5ex;
+        // height: 7.5ex; 
+        // white-space: pre-wrap;
+        max-height: 56px;
+        white-space:normal;
+        // word-break: break-all;
+        overflow: hidden;
+        
+        p {
+            text-overflow: ellipsis;
+            width: 300px;
+            overflow: hidden;
+        }
+
+        @media screen and (max-width: 400px) {
+            p {
+                width: 240px !important;
+            }
+        }
     }
     .ui__card__details {
         position: relative;
-        margin-top: 45px !important;
+        margin-top: 95px !important;
     }
     .ui__card__exp-info {
         display: flex;
@@ -158,6 +178,13 @@
             & p:nth-child(2) {
                 margin: 0 5px;
             }
+
+            p {
+                width: 100px;
+                @media screen and (max-width: 400px) {
+                    width: 60px;
+                }
+            }
         } 
         .ui__card__currency, .ui__card__author a {
             color: var(--ui-color);
@@ -199,7 +226,7 @@
     .ui__card__comment__data {
         overflow: auto;
         line-height: 150%;
-        max-height: 240px;
+        height: 200px;
     }
     @media screen and (max-width: 540px) {
         width: 310px;
