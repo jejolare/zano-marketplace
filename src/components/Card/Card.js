@@ -18,7 +18,7 @@ import Button from "../Button/Button";
 import { buyOffer } from "../../utils/rpc";
 import Slider from "../Slider/Slider";
 import { nanoid } from "nanoid";
-// import Preloader from "../Preloader/Preloader"
+import Preloader from "../Preloader/Preloader";
 
 function Card(props) {
 
@@ -28,6 +28,7 @@ function Card(props) {
     const [descPopupOpen, setDescPopupState] = useState(false);
     const [imageLoadingFailed, setImageError] = useState(false);
     const [imagePreloader, setImagePreloader] = useState(true);
+    const [isBuying, setBuyingState] = useState(false);
 
     const [activeSlide, setActiveSlide] = useState(0);
     const navigate = useNavigate();
@@ -61,7 +62,7 @@ function Card(props) {
         return (
             <div className="ui__card__comment__content">
                 <div className="popup__close" onMouseUp={() => props.close()}><CloseImg/></div>
-                <div className="ui__card__comment__data">
+                <div className="ui__card__comment__data custom-scroll">
                     {props.content || comment}
                 </div>
             </div>
@@ -108,6 +109,14 @@ function Card(props) {
     }
 
     const longDesc = descHeight > 58 || descWidth > 300;
+
+    function buyAction() {
+        setBuyingState(true);
+        setTimeout(() => {
+            setBuyingState(false);
+        }, 5000);
+        buyOffer(state.config?.address, props.title || 'Title');
+    }
 
     return (
         <div className="ui__card">
@@ -207,9 +216,11 @@ function Card(props) {
                 {state.config?.offerConfig?.buy &&
                     <Button 
                         className={"ui__card__buy-btn " + (state.config?.address ?  '' : 'disabled')} 
-                        onMouseUp={() => buyOffer(state.config?.address, props.title || 'Title')} 
+                        withIcon={true}
+                        onMouseUp={buyAction} 
                     >
-                        Buy
+                        {isBuying && <Preloader/>}
+                        {isBuying ? "Confirm with wallet" : "Buy"}
                     </Button>
                 }
 

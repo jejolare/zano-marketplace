@@ -5,6 +5,7 @@ import { isTemplatePrepared, checkAuth, redefineStyle } from "./utils/utils";
 import { Store } from "./store/store-reducer";
 import { updateMarketState, updateAdminState, updateConfigState } from "./store/actions";
 import AdminHandler from "./pages/Admin/AdminHandler";
+import Preloader from "./components/Preloader/Preloader";
 
 const MainPage = React.lazy(() => import('./pages/Main/Main'));
 const AdminPage = React.lazy(() => import('./pages/Admin/Admin'));
@@ -72,9 +73,30 @@ function App() {
     return (<></>);
   }
 
-  console.log(state);
+  const [stylesLoaded, setStylesLoaded] = useState(false);
+
+  useEffect(() => {
+
+    const timeout = setTimeout(() => {
+      if (state.config.styles[0] && !stylesLoaded) {
+        setStylesLoaded(true);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+
+  }, [state.config.styles]);
+
+  if (!state.config.styles[0]) return <></>;
+
+
   return (
     <div className="App">
+
+      {!stylesLoaded &&
+        <Preloader fullPage={true}/>
+      }
+
       <Router>
         <Suspense fallback={<></>}>
           <Routes>
